@@ -41,6 +41,21 @@
   "alternatives": {
     "tuta": {
       "description": "End-to-end encrypted email service built in Germany. Formerly known as Tutanota, Tuta offers secure email, calendar, and contacts with zero-knowledge encryption and post-quantum cryptography."
+    },
+    "mistral": {
+      "description": "French AI company building frontier open-weight large language models and Le Chat, a fast privacy-focused assistant. Founded by former Google DeepMind and Meta researchers, Mistral champions European data sovereignty with GDPR-compliant infrastructure."
+    },
+    "euria": {
+      "description": "Free, sovereign AI assistant by Swiss company Infomaniak, hosted entirely in Switzerland with renewable energy. Offers chat, voice input, image analysis, document processing, web search, and translation with an ephemeral mode that leaves no trace on servers."
+    },
+    "startpage": {
+      "description": "Dutch privacy-first search engine that delivers Google search results without tracking, logging IP addresses, or storing personal data. Features an Anonymous View proxy for browsing search results with full anonymity, and has held the European Privacy Seal since 2011."
+    },
+    "lumo": {
+      "description": "Privacy-first AI assistant from the makers of Proton Mail. Lumo keeps every conversation confidential with zero-access encryption, never logs prompts or responses, and never uses your data to train models — a stark contrast to US-based AI chatbots."
+    },
+    "ecosia": {
+      "description": "Berlin-based search engine that donates at least 80% of its profits to tree-planting projects worldwide, having funded over 200 million trees since 2009. A certified B Corp under steward-ownership, Ecosia runs on 100% renewable energy and offers a privacy-friendly alternative to US search giants."
     }
   }
 }

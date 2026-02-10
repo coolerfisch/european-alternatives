@@ -41,6 +41,21 @@
   "alternatives": {
     "tuta": {
       "description": "Ende-zu-Ende-verschlüsselter E-Mail-Dienst aus Deutschland. Früher bekannt als Tutanota, bietet Tuta sichere E-Mail, Kalender und Kontakte mit Zero-Knowledge-Verschlüsselung und Post-Quanten-Kryptografie."
+    },
+    "mistral": {
+      "description": "Französisches KI-Unternehmen, das führende Open-Weight-Sprachmodelle und Le Chat, einen schnellen, datenschutzorientierten Assistenten, entwickelt. Gegründet von ehemaligen Forschern von Google DeepMind und Meta, setzt sich Mistral für europäische Datensouveränität mit DSGVO-konformer Infrastruktur ein."
+    },
+    "euria": {
+      "description": "Kostenloser, souveräner KI-Assistent des Schweizer Unternehmens Infomaniak, vollständig in der Schweiz mit erneuerbarer Energie gehostet. Bietet Chat, Spracheingabe, Bildanalyse, Dokumentenverarbeitung, Websuche und Übersetzung mit einem flüchtigen Modus, der keinerlei Spuren auf den Servern hinterlässt."
+    },
+    "startpage": {
+      "description": "Niederländische Suchmaschine mit Fokus auf Datenschutz, die Google-Suchergebnisse liefert, ohne zu tracken, IP-Adressen zu speichern oder persönliche Daten zu erfassen. Bietet einen Anonymous-View-Proxy zum anonymen Durchsuchen von Ergebnissen und trägt seit 2011 das Europäische Datenschutzsiegel."
+    },
+    "lumo": {
+      "description": "Datenschutzorientierter KI-Assistent von den Machern von Proton Mail. Lumo hält jede Konversation mit Zero-Access-Verschlüsselung vertraulich, speichert weder Eingaben noch Antworten und verwendet Ihre Daten niemals zum Trainieren von Modellen — ein deutlicher Gegensatz zu US-amerikanischen KI-Chatbots."
+    },
+    "ecosia": {
+      "description": "Berliner Suchmaschine, die mindestens 80 % ihrer Gewinne an Baumpflanzprojekte weltweit spendet und seit 2009 über 200 Millionen Bäume finanziert hat. Als zertifiziertes B Corp in Verantwortungseigentum betreibt Ecosia seine Dienste mit 100 % erneuerbarer Energie und bietet eine datenschutzfreundliche Alternative zu US-Suchmaschinen."
     }
   }
 }
