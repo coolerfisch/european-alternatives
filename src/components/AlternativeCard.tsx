@@ -24,10 +24,6 @@ export default function AlternativeCard({ alternative, viewMode }: AlternativeCa
     return `${(lastSpace > 80 ? truncated.slice(0, lastSpace) : truncated).trim()}...`;
   })();
 
-  const trustScore = alternative.trustScore ?? 1;
-  const trustTier = alternative.trustTier ?? 'poor';
-  const trustConfidence = alternative.trustConfidence ?? 'low';
-  const vettingStatus = alternative.vettingStatus ?? 'research';
   const reservations = alternative.reservations ?? [];
 
   return (
@@ -61,27 +57,6 @@ export default function AlternativeCard({ alternative, viewMode }: AlternativeCa
             </span>
           )}
         </div>
-      </div>
-
-      <div
-        className={`alt-card-trust alt-card-trust-${trustTier}`}
-        aria-label={t('browse:card.trustSummary', {
-          score: trustScore,
-          tier: t(`browse:card.trustTier.${trustTier}`),
-          status: t(`browse:filters.status.${vettingStatus}`),
-        })}
-      >
-        <div className="alt-card-trust-label">
-          <span className="alt-card-trust-title">{t('browse:card.trustScore')}</span>
-          <span className="alt-card-trust-tier">{t(`browse:card.trustTier.${trustTier}`)}</span>
-        </div>
-        <div className="alt-card-trust-bar-track">
-          <div className="alt-card-trust-bar-fill" style={{ width: `${trustScore * 10}%` }} />
-        </div>
-        <span className="alt-card-trust-value">{t('browse:card.trustScoreLabel', { score: trustScore })}</span>
-        <span className={`alt-card-status-badge ${vettingStatus}`}>
-          {t(`browse:filters.status.${vettingStatus}`)}
-        </span>
       </div>
 
       <p className="alt-card-description">{description}</p>
@@ -143,33 +118,6 @@ export default function AlternativeCard({ alternative, viewMode }: AlternativeCa
               <div className="alt-detail-section">
                 <h4 className="alt-detail-title">{t('browse:card.about')}</h4>
                 <p className="alt-detail-text">{translatedDescription}</p>
-              </div>
-
-              <div className="alt-detail-section">
-                <h4 className="alt-detail-title">{t('browse:card.trustSectionTitle')}</h4>
-                <div className="alt-detail-meta">
-                  <div className="alt-detail-meta-item">
-                    <span className="alt-detail-meta-label">{t('browse:card.trustScore')}</span>
-                    <span className="alt-detail-meta-value">{t('browse:card.trustScoreLabel', { score: trustScore })}</span>
-                  </div>
-                  <div className="alt-detail-meta-item">
-                    <span className="alt-detail-meta-label">{t('browse:card.trustTierLabel')}</span>
-                    <span className="alt-detail-meta-value">{t(`browse:card.trustTier.${trustTier}`)}</span>
-                  </div>
-                  <div className="alt-detail-meta-item">
-                    <span className="alt-detail-meta-label">{t('browse:card.trustConfidenceLabel')}</span>
-                    <span className="alt-detail-meta-value">{t(`browse:card.trustConfidence.${trustConfidence}`)}</span>
-                  </div>
-                </div>
-                {alternative.trustRationale && alternative.trustRationale.length > 0 && (
-                  <ul className="alt-detail-rationale-list">
-                    {alternative.trustRationale.map((reason) => (
-                      <li key={reason} className="alt-detail-rationale-item">
-                        {t(`browse:card.trustReasons.${reason}`)}
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
 
               {(alternative.foundedYear != null || alternative.headquartersCity || alternative.license) && (

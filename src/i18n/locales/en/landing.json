@@ -6,15 +6,12 @@
     "categories": "Categories",
     "country_one": "Country",
     "country_other": "Countries",
-    "openSource": "Open Source",
-    "vetted": "Vetted Approved",
-    "averageTrust": "Avg Trust"
+    "openSource": "Open Source"
   },
   "browseByCategory": "Browse by Category",
   "alternative_one": "{{count}} alternative",
   "alternative_other": "{{count}} alternatives",
   "replacesGiants": "Replaces {{giants}}",
-  "featuredAlternative": "Featured Alternative",
   "visit": "Visit {{name}}",
   "seeAll": "See All Alternatives",
   "values": {
@@ -32,5 +29,9 @@
     }
   },
   "browseAlternatives": "Browse Alternatives",
+  "disclaimer": {
+    "title": "No one's perfect — and we know it",
+    "text": "Every service listed here has its own trade-offs. Some are fully open source, others aren't. Some have had incidents in the past, others are simply young and unproven. We include known reservations where we can, and we encourage you to do your own research. The goal isn't to present a flawless list — it's to show that credible European options exist."
+  },
   "communityNote": "This is a community-driven project. None of these listings are ads or sponsored — we are not paid for any of them. We cannot guarantee the quality of any listed service; most are recommendations by the community. Contributions welcome!"
 }

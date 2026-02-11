@@ -1,6 +1,11 @@
 # Serve the Vite-built SPA from dist/
 RewriteEngine On
 
+# Enforce a single canonical origin early to avoid mixed host/protocol redirects.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^european-alternatives\.cloud$ [NC]
+RewriteRule ^ https://european-alternatives.cloud%{REQUEST_URI} [R=301,L]
+
 # Skip requests already targeting dist/
 RewriteCond %{REQUEST_URI} ^/dist/ [NC]
 RewriteRule ^ - [L]

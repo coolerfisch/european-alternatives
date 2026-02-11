@@ -18,12 +18,7 @@ export interface Alternative {
   foundedYear?: number;
   headquartersCity?: string;
   license?: string;
-  vettingStatus?: VettingStatus;
   reservations?: Reservation[];
-  trustScore?: number;
-  trustTier?: TrustTier;
-  trustConfidence?: TrustConfidence;
-  trustRationale?: TrustReasonKey[];
 }
 
 export interface Reservation {
@@ -72,25 +67,9 @@ export interface Category {
 }
 
 export type OpenSourceLevel = 'full' | 'partial' | 'none';
-export type VettingStatus = 'vetted-approved' | 'vetted-rejected' | 'research';
-export type TrustTier = 'excellent' | 'good' | 'fair' | 'poor';
-export type TrustConfidence = 'high' | 'medium' | 'low';
 export type ReservationSeverity = 'minor' | 'moderate' | 'major';
-export type TrustReasonKey =
-  | 'european-jurisdiction'
-  | 'non-eu-exception'
-  | 'open-source-full'
-  | 'open-source-partial'
-  | 'closed-source'
-  | 'github-transparency'
-  | 'self-hosting-possible'
-  | 'privacy-centric-features'
-  | 'vetted-approved'
-  | 'vetted-rejected'
-  | 'not-fully-vetted'
-  | 'reservations-present';
 
-export type SortBy = 'name' | 'country' | 'category' | 'trustScore';
+export type SortBy = 'name' | 'country' | 'category';
 export type ViewMode = 'grid' | 'list';
 
 export interface SelectedFilters {
@@ -98,6 +77,4 @@ export interface SelectedFilters {
   country: CountryCode[];
   pricing: string[];
   openSourceOnly: boolean;
-  vettingStatus: VettingStatus[];
-  minTrustScore: number;
 }

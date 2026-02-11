@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { alternatives, categories } from '../data';
-import { getLocalizedAlternativeDescription } from '../utils/alternativeText';
 
 const stagger = {
   initial: {},
@@ -29,13 +27,6 @@ export default function LandingPage() {
   ).length;
   const totalCountries = new Set(alternatives.map((a) => a.country)).size;
   const openSourceCount = alternatives.filter((a) => a.isOpenSource).length;
-  const vettedApprovedCount = alternatives.filter((a) => a.vettingStatus === 'vetted-approved').length;
-  const averageTrustScore = Math.round(
-    alternatives.reduce((sum, entry) => sum + (entry.trustScore ?? 0), 0) / Math.max(alternatives.length, 1),
-  );
-  const featured = [...alternatives]
-    .sort((a, b) => (b.trustScore ?? 0) - (a.trustScore ?? 0))[0] ?? null;
-  const [featuredLogoError, setFeaturedLogoError] = useState(false);
 
   return (
     <div className="landing-page">
@@ -80,16 +71,6 @@ export default function LandingPage() {
               <span className="landing-stats-number">{openSourceCount}</span>
               <span className="landing-stats-label">{t('landing:stats.openSource')}</span>
             </div>
-            <div className="landing-stats-divider" />
-            <div className="landing-stats-item">
-              <span className="landing-stats-number">{vettedApprovedCount}</span>
-              <span className="landing-stats-label">{t('landing:stats.vetted')}</span>
-            </div>
-            <div className="landing-stats-divider" />
-            <div className="landing-stats-item">
-              <span className="landing-stats-number">{averageTrustScore}</span>
-              <span className="landing-stats-label">{t('landing:stats.averageTrust')}</span>
-            </div>
           </motion.div>
         )}
 
@@ -128,69 +109,6 @@ export default function LandingPage() {
               })}
           </div>
         </motion.div>
-
-        {/* Featured Alternative */}
-        {featured && (
-          <motion.div className="landing-featured" variants={fadeUp}>
-            <h2 className="landing-section-title">{t('landing:featuredAlternative')}</h2>
-            <div className="landing-featured-card">
-              <div className="landing-featured-header">
-                {featured.logo && !featuredLogoError ? (
-                  <img
-                    src={featured.logo}
-                    alt={t('common:logoSuffix', { name: featured.name })}
-                    className="landing-featured-logo"
-                    onError={() => setFeaturedLogoError(true)}
-                  />
-                ) : (
-                  <span className={`fi fi-${featured.country} landing-featured-logo-fallback`}></span>
-                )}
-                <div className="landing-featured-info">
-                  <h3 className="landing-featured-name">{featured.name}</h3>
-                  <div className="landing-featured-meta">
-                    <span className={`fi fi-${featured.country} landing-featured-flag`}></span>
-                    <span className="landing-featured-category">
-                      {t(`data:categories.${featured.category}.name`)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="landing-featured-description">
-                {getLocalizedAlternativeDescription(featured, lang ?? 'en')}
-              </p>
-              <div className="landing-featured-replaces">
-                <span className="landing-featured-replaces-label">{t('common:replaces')}</span>
-                {featured.replacesUS.map((name) => (
-                  <span key={name} className="landing-featured-replaces-item">{name}</span>
-                ))}
-              </div>
-              <div className="landing-featured-badges">
-                {featured.isOpenSource && (
-                  <span className="landing-featured-badge oss">{t('common:openSource')}</span>
-                )}
-                <span className={`landing-featured-badge ${featured.pricing}`}>
-                  {t(`common:pricing.${featured.pricing}`)}
-                </span>
-              </div>
-              <div className="landing-featured-actions">
-                <a
-                  href={featured.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="landing-featured-link-primary"
-                >
-                  {t('landing:visit', { name: featured.name })}
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                  </svg>
-                </a>
-                <Link to={`/${lang}/browse`} className="landing-featured-link-secondary">
-                  {t('landing:seeAll')}
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
 
         {/* Values Section */}
         <motion.div className="landing-values" variants={fadeUp}>
@@ -233,6 +151,11 @@ export default function LandingPage() {
               </svg>
             </Link>
           </motion.div>
+        </motion.div>
+
+        <motion.div className="landing-disclaimer" variants={fadeUp}>
+          <p className="landing-disclaimer-title">{t('landing:disclaimer.title')}</p>
+          <p className="landing-disclaimer-text">{t('landing:disclaimer.text')}</p>
         </motion.div>
 
         <motion.p className="landing-note" variants={fadeUp}>

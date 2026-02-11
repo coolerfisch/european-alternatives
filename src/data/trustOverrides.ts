@@ -1,31 +1,4 @@
-import type { Reservation, VettingStatus } from '../types';
-
-export const vettedApprovedIds = new Set<string>([
-  'bitwarden',
-  'cryptpad',
-  'ivpn',
-  'keepassxc',
-  'libreoffice',
-  'mastodon',
-  'mullvad-browser',
-  'mullvad-vpn',
-  'nextcloud',
-  'openproject',
-  'proton-drive',
-  'proton-mail',
-  'proton-vpn',
-  'simple-analytics',
-  'threema',
-  'tuta',
-]);
-
-export const vettedRejectedIds = new Set<string>(['nordvpn']);
-
-export function deriveVettingStatus(id: string): VettingStatus {
-  if (vettedRejectedIds.has(id)) return 'vetted-rejected';
-  if (vettedApprovedIds.has(id)) return 'vetted-approved';
-  return 'research';
-}
+import type { Reservation } from '../types';
 
 export const reservationsById: Record<string, Reservation[]> = {
   bitwarden: [
@@ -127,14 +100,4 @@ export const reservationsById: Record<string, Reservation[]> = {
       sourceUrl: 'https://www.bbc.com/news/technology-50150981',
     },
   ],
-};
-
-export const trustScoreOverrides: Record<string, number> = {
-  nordvpn: 3,
-  'stability-ai': 4,
-  'proton-mail': 8,
-  startpage: 6,
-  mistral: 7,
-  filen: 7,
-  bitwarden: 7,
 };

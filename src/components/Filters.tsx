@@ -2,17 +2,15 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { alternatives, categories } from '../data';
-import type { SelectedFilters, SortBy, ViewMode, VettingStatus } from '../types';
+import type { SelectedFilters, SortBy, ViewMode } from '../types';
 
 const pricingKeys = ['free', 'freemium', 'paid'] as const;
-const defaultVisibleStatuses: VettingStatus[] = ['vetted-approved', 'research'];
-const allVettingStatuses: VettingStatus[] = ['vetted-approved', 'research', 'vetted-rejected'];
 
 interface FiltersProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
   selectedFilters: SelectedFilters;
-  onFilterChange: (filterType: keyof SelectedFilters, values: string[] | boolean | number) => void;
+  onFilterChange: (filterType: keyof SelectedFilters, values: string[] | boolean) => void;
   onClearAll: () => void;
   sortBy: SortBy;
   onSortChange: (sort: SortBy) => void;
@@ -20,10 +18,6 @@ interface FiltersProps {
   onViewModeChange: (mode: ViewMode) => void;
   totalCount: number;
   filteredCount: number;
-}
-
-function hasSameStatuses(selected: VettingStatus[], expected: VettingStatus[]) {
-  return selected.length === expected.length && expected.every((status) => selected.includes(status));
 }
 
 export default function Filters({
@@ -47,17 +41,13 @@ export default function Filters({
     [],
   );
 
-  const hasCustomStatusFilter = !hasSameStatuses(selectedFilters.vettingStatus, defaultVisibleStatuses);
-
   const hasActiveFilters =
     selectedFilters.category.length > 0 ||
     selectedFilters.country.length > 0 ||
     selectedFilters.pricing.length > 0 ||
-    selectedFilters.openSourceOnly ||
-    hasCustomStatusFilter ||
-    selectedFilters.minTrustScore > 1;
+    selectedFilters.openSourceOnly;
 
-  const toggleFilter = (type: 'category' | 'country' | 'pricing' | 'vettingStatus', value: string) => {
+  const toggleFilter = (type: 'category' | 'country' | 'pricing', value: string) => {
     const current = selectedFilters[type] as string[];
     const updated = current.includes(value)
       ? current.filter((currentValue) => currentValue !== value)
@@ -106,7 +96,6 @@ export default function Filters({
               <option value="name">{t('browse:filters.sortName')}</option>
               <option value="country">{t('browse:filters.sortCountry')}</option>
               <option value="category">{t('browse:filters.sortCategory')}</option>
-              <option value="trustScore">{t('browse:filters.sortTrustScore')}</option>
             </select>
             <svg className="sort-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M7 10l5 5 5-5z"/>
@@ -250,46 +239,6 @@ export default function Filters({
                   </span>
                   <span className="filter-label-text">{t('browse:filters.openSourceOnly')}</span>
                 </label>
-              </div>
-
-              <div className="filters-group">
-                <h4 className="filters-group-title">{t('browse:filters.trustTitle')}</h4>
-
-                <label className="filter-label">
-                  <span className="filter-label-text">{t('browse:filters.minTrust')}</span>
-                  <select
-                    className="filters-inline-select"
-                    value={selectedFilters.minTrustScore}
-                    onChange={(event) => onFilterChange('minTrustScore', Number(event.target.value))}
-                    aria-label={t('browse:filters.minTrust')}
-                  >
-                    <option value={1}>{t('browse:filters.minTrustAny')}</option>
-                    <option value={5}>{t('browse:filters.minTrust5')}</option>
-                    <option value={7}>{t('browse:filters.minTrust7')}</option>
-                    <option value={8}>{t('browse:filters.minTrust8')}</option>
-                  </select>
-                </label>
-
-                <div className="filter-separator" />
-
-                {allVettingStatuses.map((status) => (
-                  <label key={status} className="filter-label">
-                    <input
-                      type="checkbox"
-                      className="filter-checkbox"
-                      checked={selectedFilters.vettingStatus.includes(status)}
-                      onChange={() => toggleFilter('vettingStatus', status)}
-                    />
-                    <span className="filter-checkbox-custom">
-                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                      </svg>
-                    </span>
-                    <span className="filter-label-text">
-                      {t(`browse:filters.status.${status}`)}
-                    </span>
-                  </label>
-                ))}
               </div>
             </div>
           </motion.div>

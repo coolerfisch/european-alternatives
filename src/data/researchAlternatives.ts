@@ -6,33 +6,6 @@ import type { Alternative } from '../types';
 
 export const researchAlternatives: Alternative[] = [
   {
-    "id": "adyen",
-    "name": "Adyen",
-    "category": "payments",
-    "country": "nl",
-    "replacesUS": [
-      "Stripe",
-      "PayPal",
-      "Square"
-    ],
-    "pricing": "paid",
-    "website": "https://www.adyen.com",
-    "description": "Amsterdam-based global payments platform with acquiring-bank status, powering checkout for enterprises like Spotify, Uber, and eBay. Adyen uses interchange++ pricing for full cost transparency and supports in-store, online, and mobile payments in a single unified platform.",
-    "localizedDescriptions": {
-      "de": "Globale Zahlungsplattform mit Banklizenz aus Amsterdam, die den Checkout für Unternehmen wie Spotify, Uber und eBay abwickelt. Adyen nutzt Interchange++-Preise für volle Kostentransparenz und vereint In-Store-, Online- und Mobile-Zahlungen in einer einzigen Plattform."
-    },
-    "isOpenSource": false,
-    "openSourceLevel": "none",
-    "tags": [
-      "payments",
-      "paid",
-      "stripe",
-      "paypal"
-    ],
-    "foundedYear": 2006,
-    "headquartersCity": "Amsterdam"
-  },
-  {
     "id": "airvpn",
     "name": "AirVPN",
     "category": "vpn",
@@ -73,9 +46,9 @@ export const researchAlternatives: Alternative[] = [
     ],
     "pricing": "freemium",
     "website": "https://bitwarden.com",
-    "description": "Open-source password manager offering end-to-end encrypted storage for passwords, passkeys, credit cards, and sensitive notes across every platform. With a generous free tier, self-hosting support, and full third-party security audits, Bitwarden is the leading transparent alternative to proprietary password vaults.",
+    "description": "US-based but fully open-source password manager offering end-to-end encrypted storage for passwords, passkeys, credit cards, and sensitive notes across every platform. With a generous free tier, self-hosting support, and full third-party security audits, Bitwarden is the leading transparent alternative to proprietary password vaults. Note: Bitwarden is headquartered in the US but included here for its open-source nature and self-hosting capability.",
     "localizedDescriptions": {
-      "de": "Open-Source-Passwortmanager mit Ende-zu-Ende-verschlüsselter Speicherung von Passwörtern, Passkeys, Kreditkarten und vertraulichen Notizen auf allen Plattformen. Mit einem großzügigen kostenlosen Tarif, Self-Hosting-Option und vollständigen unabhängigen Sicherheitsaudits ist Bitwarden die führende transparente Alternative zu proprietären Passwort-Tresoren."
+      "de": "In den USA ansässiger, aber vollständig quelloffener Passwortmanager mit Ende-zu-Ende-verschlüsselter Speicherung von Passwörtern, Passkeys, Kreditkarten und vertraulichen Notizen auf allen Plattformen. Mit einem großzügigen kostenlosen Tarif, Self-Hosting-Option und vollständigen unabhängigen Sicherheitsaudits ist Bitwarden die führende transparente Alternative zu proprietären Passwort-Tresoren. Hinweis: Bitwarden hat seinen Sitz in den USA, wird aber aufgrund seiner Open-Source-Natur und Self-Hosting-Möglichkeit hier gelistet."
     },
     "isOpenSource": true,
     "openSourceLevel": "full",
@@ -984,9 +957,9 @@ export const researchAlternatives: Alternative[] = [
     ],
     "pricing": "freemium",
     "website": "https://ollama.com",
-    "description": "Open-source tool for running large language models locally on your own hardware. Ollama keeps your data fully private with no cloud dependency, offers an OpenAI-compatible API, and supports hundreds of open models including Llama, Mistral, Gemma, and DeepSeek.",
+    "description": "US-based but fully open-source tool for running large language models locally on your own hardware. Ollama keeps your data fully private with no cloud dependency, offers an OpenAI-compatible API, and supports hundreds of open models including Llama, Mistral, Gemma, and DeepSeek. Note: Ollama is headquartered in the US but included here for its open-source nature and fully local execution.",
     "localizedDescriptions": {
-      "de": "Open-Source-Tool zum lokalen Ausführen großer Sprachmodelle auf eigener Hardware. Ollama bewahrt vollständige Datensouveränität ohne Cloud-Abhängigkeit, bietet eine OpenAI-kompatible API und unterstützt hunderte offene Modelle wie Llama, Mistral, Gemma und DeepSeek."
+      "de": "In den USA ansässiges, aber vollständig quelloffenes Tool zum lokalen Ausführen großer Sprachmodelle auf eigener Hardware. Ollama bewahrt vollständige Datensouveränität ohne Cloud-Abhängigkeit, bietet eine OpenAI-kompatible API und unterstützt hunderte offene Modelle wie Llama, Mistral, Gemma und DeepSeek. Hinweis: Ollama hat seinen Sitz in den USA, wird aber aufgrund seiner Open-Source-Natur und vollständig lokalen Ausführung hier gelistet."
     },
     "isOpenSource": true,
     "openSourceLevel": "full",
@@ -1002,35 +975,6 @@ export const researchAlternatives: Alternative[] = [
     "headquartersCity": "Palo Alto, CA",
     "githubUrl": "https://github.com/ollama/ollama",
     "license": "MIT"
-  },
-  {
-    "id": "onlyoffice",
-    "name": "ONLYOFFICE",
-    "category": "office-suite",
-    "country": "lv",
-    "replacesUS": [
-      "Microsoft Office",
-      "Google Workspace"
-    ],
-    "pricing": "freemium",
-    "website": "https://www.onlyoffice.com",
-    "description": "Latvian-built collaborative office suite with high-fidelity Microsoft Office compatibility. The free Community Edition supports up to 20 users with real-time co-editing of documents, spreadsheets and presentations, while paid plans add enterprise features and unlimited users.",
-    "localizedDescriptions": {
-      "de": "In Lettland entwickelte kollaborative Office-Suite mit hoher Microsoft-Office-Kompatibilität. Die kostenlose Community Edition unterstützt bis zu 20 Nutzer mit Echtzeit-Bearbeitung von Dokumenten, Tabellen und Präsentationen, während kostenpflichtige Pläne Enterprise-Funktionen und unbegrenzte Nutzer bieten."
-    },
-    "isOpenSource": true,
-    "openSourceLevel": "full",
-    "tags": [
-      "office-suite",
-      "freemium",
-      "open-source",
-      "microsoft-office",
-      "google-workspace"
-    ],
-    "foundedYear": 2009,
-    "headquartersCity": "Riga",
-    "githubUrl": "https://github.com/ONLYOFFICE",
-    "license": "AGPL-3.0"
   },
   {
     "id": "openproject",
@@ -1758,38 +1702,6 @@ export const researchAlternatives: Alternative[] = [
     "headquartersCity": "Pfäffikon",
     "githubUrl": "https://github.com/threema-ch",
     "license": "AGPL-3.0"
-  },
-  {
-    "id": "tresorit",
-    "name": "Tresorit",
-    "category": "cloud-storage",
-    "country": "ch",
-    "replacesUS": [
-      "Google Drive",
-      "Dropbox",
-      "OneDrive",
-      "iCloud"
-    ],
-    "pricing": "freemium",
-    "website": "https://tresorit.com",
-    "description": "End-to-end encrypted cloud storage owned by Swiss Post, combining Swiss privacy jurisdiction with zero-knowledge security. Tresorit is trusted by enterprises and governments to protect sensitive files without sacrificing usability.",
-    "localizedDescriptions": {
-      "de": "Ende-zu-Ende-verschlüsselter Cloud-Speicher im Besitz der Schweizerischen Post, der Schweizer Datenschutzrecht mit Zero-Knowledge-Sicherheit verbindet. Tresorit wird von Unternehmen und Behörden geschätzt, um sensible Dateien ohne Einbußen bei der Benutzerfreundlichkeit zu schützen."
-    },
-    "isOpenSource": false,
-    "openSourceLevel": "none",
-    "tags": [
-      "cloud-storage",
-      "freemium",
-      "privacy",
-      "encryption",
-      "zero-knowledge",
-      "cloud",
-      "google-drive",
-      "dropbox"
-    ],
-    "foundedYear": 2011,
-    "headquartersCity": "Zürich"
   },
   {
     "id": "vikunja",

@@ -6,10 +6,9 @@ import { alternatives, categories } from '../data';
 import AlternativeCard from './AlternativeCard';
 import Filters from './Filters';
 import { getLocalizedAlternativeDescription } from '../utils/alternativeText';
-import type { CategoryId, CountryCode, SelectedFilters, SortBy, VettingStatus, ViewMode } from '../types';
+import type { CategoryId, CountryCode, SelectedFilters, SortBy, ViewMode } from '../types';
 
 const validCategoryIds = new Set<string>(categories.map((category) => category.id));
-const defaultVettingStatuses: VettingStatus[] = ['vetted-approved', 'research'];
 
 export default function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,9 +33,7 @@ export default function BrowsePage() {
   const [countryFilters, setCountryFilters] = useState<CountryCode[]>([]);
   const [pricingFilters, setPricingFilters] = useState<string[]>([]);
   const [openSourceOnly, setOpenSourceOnly] = useState(false);
-  const [vettingStatusFilters, setVettingStatusFilters] = useState<VettingStatus[]>(defaultVettingStatuses);
-  const [minTrustScore, setMinTrustScore] = useState(1);
-  const [sortBy, setSortBy] = useState<SortBy>('trustScore');
+  const [sortBy, setSortBy] = useState<SortBy>('name');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
   const selectedFilters: SelectedFilters = useMemo(
@@ -45,10 +42,8 @@ export default function BrowsePage() {
       country: countryFilters,
       pricing: pricingFilters,
       openSourceOnly,
-      vettingStatus: vettingStatusFilters,
-      minTrustScore,
     }),
-    [categoryFilters, countryFilters, pricingFilters, openSourceOnly, vettingStatusFilters, minTrustScore],
+    [categoryFilters, countryFilters, pricingFilters, openSourceOnly],
   );
 
   const handleSearchChange = useCallback((term: string) => {
@@ -62,7 +57,7 @@ export default function BrowsePage() {
     setSearchParamsRef.current(params, { replace: true });
   }, []);
 
-  const handleFilterChange = useCallback((filterType: keyof SelectedFilters, values: string[] | boolean | number) => {
+  const handleFilterChange = useCallback((filterType: keyof SelectedFilters, values: string[] | boolean) => {
     switch (filterType) {
       case 'category': {
         const params = new URLSearchParams(latestParamsRef.current);
@@ -83,12 +78,6 @@ export default function BrowsePage() {
       case 'openSourceOnly':
         setOpenSourceOnly(values as boolean);
         break;
-      case 'vettingStatus':
-        setVettingStatusFilters(values as VettingStatus[]);
-        break;
-      case 'minTrustScore':
-        setMinTrustScore(values as number);
-        break;
     }
   }, []);
 
@@ -103,8 +92,6 @@ export default function BrowsePage() {
     setCountryFilters([]);
     setPricingFilters([]);
     setOpenSourceOnly(false);
-    setVettingStatusFilters(defaultVettingStatuses);
-    setMinTrustScore(1);
   }, []);
 
   const filteredAlternatives = useMemo(() => {
@@ -142,16 +129,6 @@ export default function BrowsePage() {
       result = result.filter((alternative) => alternative.isOpenSource);
     }
 
-    if (selectedFilters.vettingStatus.length > 0) {
-      result = result.filter((alternative) => {
-        return selectedFilters.vettingStatus.includes(alternative.vettingStatus ?? 'research');
-      });
-    }
-
-    if (selectedFilters.minTrustScore > 1) {
-      result = result.filter((alternative) => (alternative.trustScore ?? 0) >= selectedFilters.minTrustScore);
-    }
-
     result.sort((a, b) => {
       switch (sortBy) {
         case 'name':
@@ -160,10 +137,6 @@ export default function BrowsePage() {
           return a.country.localeCompare(b.country);
         case 'category':
           return a.category.localeCompare(b.category);
-        case 'trustScore': {
-          const trustDiff = (b.trustScore ?? 0) - (a.trustScore ?? 0);
-          return trustDiff !== 0 ? trustDiff : a.name.localeCompare(b.name);
-        }
         default:
           return 0;
       }
