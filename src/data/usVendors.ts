@@ -20,10 +20,14 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
     aliases: ['gmail'],
   },
   {
+    id: 'google-search',
+    name: 'Google Search',
+    aliases: ['google search'],
+  },
+  {
     id: 'google',
     name: 'Google',
     aliases: [
-      'google search',
       'google workspace',
       'google maps',
       'google chrome',
@@ -218,6 +222,52 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
         severity: 'moderate',
         date: '2025-01-15',
         sourceUrl: 'https://workspace.google.com/blog/product-announcements/empowering-businesses-with-AI',
+      },
+    ],
+  },
+  'google-search': {
+    trustScore: 2.0,
+    description:
+      'US-operated search platform with strong engineering depth, but structural ad-surveillance incentives, AI training defaults, and major legal findings materially reduce trust.',
+    descriptionDe:
+      'US-Suchplattform mit starker technischer Reife, deren Vertrauen aber durch strukturelle Ad-Surveillance-Anreize, KI-Trainings-Defaults und schwere Rechtsbefunde deutlich sinkt.',
+    reservations: [
+      {
+        id: 'search-ad-surveillance-business-model',
+        text: 'Google Search is tied to Alphabet\'s advertising-driven business model, creating structural incentives to maximize data extraction and ad targeting.',
+        textDe: 'Google Search ist an Alphabets werbefinanziertes Geschaeftsmodell gekoppelt, was strukturelle Anreize fuer maximale Datenerhebung und Ad-Targeting schafft.',
+        severity: 'major',
+        sourceUrl: 'https://www.sec.gov/ixviewer/ix.html?doc=/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm',
+      },
+      {
+        id: 'search-default-ai-training-controls',
+        text: 'Google states Search interactions can be used to improve generative AI models, including signed-out searches and aggregated/anonymized usage even after certain controls are disabled.',
+        textDe: 'Google dokumentiert, dass Search-Interaktionen zur Verbesserung generativer KI genutzt werden koennen, einschliesslich ausgeloggter Suchen und aggregierter/anonymisierter Nutzung auch bei deaktivierten Kontrollen.',
+        severity: 'major',
+        sourceUrl: 'https://support.google.com/websearch/answer/14901683',
+      },
+      {
+        id: 'search-antitrust-monopoly-finding',
+        text: 'The US court found Google maintained an illegal search monopoly, and remedies now impose restrictions tied to default-distribution and data access.',
+        textDe: 'Das US-Gericht stellte fest, dass Google ein illegales Suchmonopol aufrechterhalten hat; die verhaengten Auflagen betreffen unter anderem Default-Distribution und Datenzugang.',
+        severity: 'major',
+        date: '2024-08-05',
+        sourceUrl: 'https://www.justice.gov/opa/pr/department-justice-wins-significant-remedies-against-google',
+      },
+      {
+        id: 'search-major-privacy-settlement-2025',
+        text: 'Google agreed to a $1.375B Texas settlement over privacy allegations, including location tracking and incognito-related practices.',
+        textDe: 'Google stimmte in Texas einem Vergleich ueber 1,375 Mrd. USD wegen Privacy-Vorwuerfen zu, einschliesslich Standort-Tracking und Incognito-bezogener Praktiken.',
+        severity: 'major',
+        date: '2025-05-09',
+        sourceUrl: 'https://apnews.com/article/8097e181cc7cb8522781db8a9a897eea',
+      },
+      {
+        id: 'search-us-controller-global-processing',
+        text: 'Google privacy terms describe global processing and specify Google LLC as data controller for information indexed and displayed in Search regardless of user location.',
+        textDe: 'Googles Datenschutzhinweise beschreiben globale Verarbeitung und benennen Google LLC als Data Controller fuer in Search indexierte und angezeigte Informationen unabhaengig vom Standort des Nutzers.',
+        severity: 'moderate',
+        sourceUrl: 'https://policies.google.com/privacy',
       },
     ],
   },
