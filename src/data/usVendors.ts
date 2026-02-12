@@ -20,6 +20,11 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
     aliases: ['gmail'],
   },
   {
+    id: 'google-drive',
+    name: 'Google Drive',
+    aliases: ['google drive', 'drive.google.com', 'gdrive'],
+  },
+  {
     id: 'google-docs',
     name: 'Google Docs',
     aliases: ['google docs', 'google document', 'docs.google.com'],
@@ -40,9 +45,24 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
     aliases: ['google nest', 'nest hub', 'nest mini', 'nest audio'],
   },
   {
+    id: 'google-gemini',
+    name: 'Google Gemini',
+    aliases: ['google gemini', 'gemini ai', 'gemini app', 'gemini advanced'],
+  },
+  {
     id: 'apple-homekit',
     name: 'Apple HomeKit',
     aliases: ['apple home', 'homekit', 'apple home app'],
+  },
+  {
+    id: 'amazon-alexa',
+    name: 'Amazon Alexa',
+    aliases: ['amazon alexa', 'alexa', 'echo', 'echo dot', 'echo show', 'alexa plus', 'alexa+'],
+  },
+  {
+    id: 'bing',
+    name: 'Bing',
+    aliases: ['bing', 'microsoft bing', 'bing search', 'bing chat'],
   },
   {
     id: 'google',
@@ -51,11 +71,9 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
       'google meet',
       'google workspace',
       'google maps',
-      'google drive',
       'google ai',
       'google cloud',
       'google analytics',
-      'google gemini',
       'google translate',
       'google imagen',
       'waze',
@@ -77,12 +95,24 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
       'microsoft outlook desktop',
       'onedrive',
       'microsoft office',
-      'bing',
       'edge',
       'azure',
       'microsoft copilot',
       'github copilot',
       'linkedin',
+    ],
+  },
+  {
+    id: 'microsoft-windows',
+    name: 'Microsoft Windows',
+    aliases: [
+      'microsoft windows',
+      'windows',
+      'windows os',
+      'windows 10',
+      'windows 11',
+      'win10',
+      'win11',
     ],
   },
   {
@@ -103,7 +133,16 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
   {
     id: 'meta',
     name: 'Meta',
-    aliases: ['facebook', 'instagram'],
+    aliases: [
+      'facebook',
+      'facebook groups',
+      'facebook-groups',
+      'instagram',
+      'meta',
+      'meta facebook',
+      'meta (facebook)',
+      'facebook / meta (facebook)',
+    ],
   },
   {
     id: 'whatsapp',
@@ -176,6 +215,11 @@ const US_VENDOR_RECORDS: USVendorRecord[] = [
     aliases: [],
   },
   {
+    id: 'notion',
+    name: 'Notion',
+    aliases: ['notion.so', 'notion ai', 'notion calendar'],
+  },
+  {
     id: 'monday-com',
     name: 'Monday.com',
     aliases: ['monday'],
@@ -226,9 +270,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   gmail: {
     trustScore: 2.7,
     description:
-      'US-operated email service with strong technical hardening, but trust is reduced by Alphabet\'s ad-driven incentives, major privacy enforcement actions, and antitrust rulings.',
+        'US-operated email service with strong technical hardening, but trust is reduced by Alphabet\'s ad-driven incentives, major privacy enforcement actions, and antitrust rulings.',
     descriptionDe:
-      'US-E-Mail-Dienst mit starker technischer Absicherung, dessen Vertrauen aber durch Alphabets werbegetriebene Anreize, schwere Privacy-Verfahren und Antitrust-Urteile reduziert wird.',
+        'US-E-Mail-Dienst mit starker technischer Absicherung, dessen Vertrauen aber durch Alphabets werbegetriebene Anreize, schwere Privacy-Verfahren und Antitrust-Urteile reduziert wird.',
     reservations: [
       {
         id: 'ad-tech-majority-control',
@@ -263,12 +307,96 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  'google-drive': {
+    trustScore: 2.6,
+    description:
+        'US-operated cloud storage service with strong security/compliance controls and export tooling, but trust is materially reduced by US legal-process exposure, Alphabet\'s ad-driven incentives, major privacy enforcement, and lock-in/reliability risks in Drive-adjacent workflows.',
+    descriptionDe:
+        'US-Cloudspeicherdienst mit starken Security-/Compliance-Kontrollen und Export-Tooling; das Vertrauen sinkt jedoch deutlich durch US-Rechtszugriffsrisiken, Alphabets werbegetriebene Anreize, schwere Privacy-Durchsetzung sowie Lock-in- und Reliability-Risiken in Drive-nahen Workflows.',
+    reservations: [
+      {
+        id: 'drive-us-legal-process-exposure',
+        text: 'As a US provider, Google can be compelled under US legal-process frameworks, so EU data-location controls alone do not fully remove jurisdictional disclosure risk.',
+        textDe: 'Als US-Anbieter kann Google unter US-Rechtsrahmen zur Datenausgabe verpflichtet werden; reine EU-Datenlokation beseitigt dieses Jurisdiktionsrisiko nicht vollstaendig.',
+        severity: 'major',
+        sourceUrl: 'https://www.law.cornell.edu/uscode/text/18/2713',
+      },
+      {
+        id: 'drive-ad-tech-majority-control',
+        text: 'Alphabet remains majority-funded by advertising, creating structural incentives that can conflict with strict privacy-first expectations for cloud storage.',
+        textDe: 'Alphabet erzielt weiterhin den Grossteil seines Umsatzes aus Werbung; das schafft strukturelle Anreize, die mit strikten Privacy-First-Erwartungen an Cloudspeicher kollidieren koennen.',
+        severity: 'major',
+        sourceUrl: 'https://www.sec.gov/ixviewer/ix.html?doc=/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm',
+      },
+      {
+        id: 'drive-major-privacy-settlement-2025',
+        text: 'Google agreed to a $1.375B Texas settlement over privacy allegations around location, incognito, and biometrics.',
+        textDe: 'Google stimmte in Texas einem Vergleich ueber 1,375 Mrd. USD zu, basierend auf Privacy-Vorwuerfen zu Standortdaten, Incognito und biometrischen Daten.',
+        severity: 'major',
+        date: '2025-05-09',
+        sourceUrl: 'https://apnews.com/article/8097e181cc7cb8522781db8a9a897eea',
+      },
+      {
+        id: 'drive-cnil-cookie-advertising-fine-2025',
+        text: 'France\'s CNIL fined Google EUR 325M in September 2025 over ad insertion between Gmail emails and cookie-consent violations during account creation flows.',
+        textDe: 'Die franzoesische CNIL verhaengte im September 2025 eine Strafe von 325 Mio. EUR gegen Google wegen Werbeeinblendungen zwischen Gmail-E-Mails und Cookie-Consent-Verstoessen bei der Account-Erstellung.',
+        severity: 'major',
+        date: '2025-09-03',
+        sourceUrl: 'https://www.cnil.fr/en/cookies-and-advertisements-inserted-between-emails-google-fined-325-million-euros-cnil',
+      },
+      {
+        id: 'drive-antitrust-adtech-ruling-2025',
+        text: 'US antitrust litigation found Google liable in open-web ad-tech markets, reinforcing governance and market-concentration risk for the broader Drive ecosystem.',
+        textDe: 'US-Antitrust-Verfahren stellten eine Haftung Googles im Open-Web-Ad-Tech-Markt fest und verstaerken damit Governance- und Marktkonzentrationsrisiken im weiteren Drive-Oekosystem.',
+        severity: 'major',
+        date: '2025-04-17',
+        sourceUrl: 'https://www.justice.gov/opa/pr/department-justice-prevails-landmark-antitrust-case-against-google',
+      },
+      {
+        id: 'drive-desktop-unsynced-file-loss-84x',
+        text: 'Google documented a Drive for desktop v84.x issue where unsynced local files could be lost and published a recovery workflow, indicating real endpoint-sync resilience risk.',
+        textDe: 'Google dokumentierte ein Drive-for-desktop-v84.x-Problem, bei dem unsynchronisierte lokale Dateien verloren gehen konnten, und veroeffentlichte einen Recovery-Workflow; das zeigt ein reales Endpoint-Sync-Resilienzrisiko.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.google.com/drive/answer/16631477?hl=en',
+      },
+      {
+        id: 'drive-export-format-conversion-friction',
+        text: 'Data export exists, but migration from native Google file types often relies on format conversion, which can introduce fidelity and workflow friction.',
+        textDe: 'Datenexport ist verfuegbar, aber die Migration aus nativen Google-Dateitypen basiert oft auf Formatkonvertierung, was zu Fidelity- und Workflow-Reibung fuehren kann.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.google.com/docs/answer/49114',
+      },
+      {
+        id: 'drive-workspace-ai-bundled-pricing-2025',
+        text: 'Workspace plans were repriced while Gemini AI capabilities were bundled into base offerings, reducing cost opt-out flexibility for organizations using Drive inside Workspace.',
+        textDe: 'Workspace-Plaene wurden neu bepreist, waehrend Gemini-AI-Funktionen in Basispakete gebuendelt wurden; dadurch sinkt die Kosten-Opt-out-Flexibilitaet fuer Organisationen, die Drive in Workspace nutzen.',
+        severity: 'moderate',
+        date: '2025-01-15',
+        sourceUrl: 'https://workspace.google.com/blog/product-announcements/empowering-businesses-with-AI',
+      },
+      {
+        id: 'drive-account-termination-data-loss-risk',
+        text: 'Google Drive Additional Terms state that account or access suspension/termination can limit service use and data access, so backup discipline remains necessary.',
+        textDe: 'Die zusaetzlichen Google-Drive-Bedingungen nennen, dass Account- oder Zugriffssperren die Dienstnutzung und den Datenzugriff einschraenken koennen; regelmaessige Backups bleiben daher notwendig.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.google.com/drive/terms-of-service/',
+      },
+      {
+        id: 'drive-two-year-overquota-inactivity-deletion-policy',
+        text: 'Google\'s account-storage policy states that if a consumer account remains over quota (or inactive in services) for two years, content in Gmail, Drive, and Photos may be deleted.',
+        textDe: 'Googles Account-Storage-Policy nennt, dass bei zwei Jahren Ueberquota (oder Inaktivitaet in Diensten) Inhalte in Gmail, Drive und Photos geloescht werden koennen.',
+        severity: 'moderate',
+        date: '2020-11-11',
+        sourceUrl: 'https://blog.google/products-and-platforms/products/workspace/storage-policy-update/',
+      },
+    ],
+  },
   'google-docs': {
     trustScore: 2.8,
     description:
-      'US-operated document platform with strong enterprise security controls, but trust is materially reduced by US legal-process exposure, Alphabet\'s ad-driven corporate incentives, and major privacy/antitrust enforcement history.',
+        'US-operated document platform with strong enterprise security controls, but trust is materially reduced by US legal-process exposure, Alphabet\'s ad-driven corporate incentives, and major privacy/antitrust enforcement history.',
     descriptionDe:
-      'US-Dokumentenplattform mit starken Enterprise-Sicherheitskontrollen, deren Vertrauen jedoch durch US-Rechtszugriffsrisiken, Alphabets werbegetriebene Unternehmensanreize und schwere Privacy-/Antitrust-Verfahren deutlich sinkt.',
+        'US-Dokumentenplattform mit starken Enterprise-Sicherheitskontrollen, deren Vertrauen jedoch durch US-Rechtszugriffsrisiken, Alphabets werbegetriebene Unternehmensanreize und schwere Privacy-/Antitrust-Verfahren deutlich sinkt.',
     reservations: [
       {
         id: 'docs-us-legal-process-exposure',
@@ -335,9 +463,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   'google-chrome': {
     trustScore: 2.3,
     description:
-      'US-operated browser with elite patch velocity and exploit response, but trust is materially reduced by ad-driven incentives, privacy litigation over Incognito expectations, and antitrust pressure tied to default-distribution power.',
+        'US-operated browser with elite patch velocity and exploit response, but trust is materially reduced by ad-driven incentives, privacy litigation over Incognito expectations, and antitrust pressure tied to default-distribution power.',
     descriptionDe:
-      'US-Browser mit sehr starker Patch-Geschwindigkeit und Exploit-Reaktion, dessen Vertrauen jedoch durch werbegetriebene Anreize, Privacy-Klagen rund um Incognito-Erwartungen und Antitrust-Druck bei Default-Verteilung deutlich sinkt.',
+        'US-Browser mit sehr starker Patch-Geschwindigkeit und Exploit-Reaktion, dessen Vertrauen jedoch durch werbegetriebene Anreize, Privacy-Klagen rund um Incognito-Erwartungen und Antitrust-Druck bei Default-Verteilung deutlich sinkt.',
     reservations: [
       {
         id: 'chrome-ad-tech-majority-control',
@@ -422,9 +550,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   'google-home': {
     trustScore: 2.4,
     description:
-      'US-operated smart-home ecosystem with solid security maintenance, but trust is materially reduced by ad-tech parent incentives, default Home History AI-training pathways, and recurring privacy/lifecycle controversies.',
+        'US-operated smart-home ecosystem with solid security maintenance, but trust is materially reduced by ad-tech parent incentives, default Home History AI-training pathways, and recurring privacy/lifecycle controversies.',
     descriptionDe:
-      'US-Smart-Home-Oekosystem mit solider Security-Wartung, dessen Vertrauen aber durch ad-tech-getriebene Konzernanreize, AI-Training ueber Home-History-Defaults und wiederkehrende Privacy-/Lifecycle-Kontroversen klar sinkt.',
+        'US-Smart-Home-Oekosystem mit solider Security-Wartung, dessen Vertrauen aber durch ad-tech-getriebene Konzernanreize, AI-Training ueber Home-History-Defaults und wiederkehrende Privacy-/Lifecycle-Kontroversen klar sinkt.',
     reservations: [
       {
         id: 'home-ad-tech-majority-control',
@@ -512,12 +640,98 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  'google-gemini': {
+    trustScore: 3.1,
+    description:
+        'US-operated AI assistant with strong certification and patch cadence, but trust is reduced by ad-driven parent incentives, free-tier data-usage defaults, and ongoing privacy/copyright litigation exposure.',
+    descriptionDe:
+        'US-AI-Assistent mit starker Zertifizierungs- und Patch-Basis, dessen Vertrauen jedoch durch ad-tech-getriebene Konzernanreize, datenintensive Consumer-Defaults und laufende Privacy-/Copyright-Litigation sinkt.',
+    reservations: [
+      {
+        id: 'gemini-ad-tech-majority-control',
+        text: 'Alphabet remains majority-funded by advertising, creating structural incentives that can conflict with privacy-first expectations for consumer AI assistants.',
+        textDe: 'Alphabet erzielt weiterhin den Grossteil seines Umsatzes aus Werbung, was strukturelle Anreize schafft, die mit Privacy-First-Erwartungen an Consumer-AI-Assistenten kollidieren koennen.',
+        severity: 'major',
+        sourceUrl: 'https://www.sec.gov/ixviewer/ix.html?doc=/Archives/edgar/data/1652044/000165204425000014/goog-20241231.htm',
+      },
+      {
+        id: 'gemini-free-tier-training-and-human-review',
+        text: 'Gemini Apps privacy terms state that free-tier interactions can be reviewed by humans and used to improve Google products and machine-learning technologies.',
+        textDe: 'Die Gemini-Apps-Privacy-Texte nennen, dass Interaktionen im Free-Tier durch Menschen geprueft und zur Verbesserung von Google-Produkten sowie Machine-Learning-Technologien genutzt werden koennen.',
+        severity: 'major',
+        sourceUrl: 'https://support.google.com/gemini/answer/13594961?hl=en',
+      },
+      {
+        id: 'gemini-activity-retention-default-18-months',
+        text: 'Gemini Apps activity is saved for up to 18 months by default before auto-delete settings are adjusted, increasing retention exposure for sensitive prompts.',
+        textDe: 'Gemini-Apps-Aktivitaet wird standardmaessig bis zu 18 Monate gespeichert, sofern Auto-Delete-Einstellungen nicht angepasst werden; das erhoeht Retention-Exposition fuer sensible Prompts.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.google.com/gemini/answer/13594961?hl=en',
+      },
+      {
+        id: 'gemini-workspace-bundled-pricing-2025',
+        text: 'Google repriced Workspace plans while bundling Gemini AI capabilities into core business tiers, reducing opt-out flexibility for organizations that do not want AI features.',
+        textDe: 'Google bepreiste Workspace-Plaene neu und buendelte Gemini-AI-Funktionen in Kern-Tarife, wodurch die Opt-out-Flexibilitaet fuer Organisationen ohne AI-Bedarf sinkt.',
+        severity: 'moderate',
+        date: '2025-01-15',
+        sourceUrl: 'https://workspace.google.com/blog/product-announcements/empowering-businesses-with-AI',
+      },
+      {
+        id: 'gemini-prompt-injection-risk-2025',
+        text: 'Google published dedicated prompt-injection mitigations for Gemini, reflecting persistent real-world attack pressure on tool-using agent workflows.',
+        textDe: 'Google veroeffentlichte dedizierte Prompt-Injection-Mitigierungen fuer Gemini; das zeigt anhaltenden realen Angriffsdruck auf Tool-gestuetzte Agent-Workflows.',
+        severity: 'moderate',
+        date: '2025-06-13',
+        sourceUrl: 'https://security.googleblog.com/2025/06/mitigating-prompt-injection-attacks.html',
+      },
+      {
+        id: 'gemini-vertex-api-cve-2024-12236',
+        text: 'CVE-2024-12236 disclosed potential data exfiltration in certain Vertex AI Gemini API contexts before Google-issued remediation.',
+        textDe: 'CVE-2024-12236 beschrieb potenzielle Datenexfiltration in bestimmten Vertex-AI-Gemini-API-Kontexten vor bereitgestellter Google-Remediation.',
+        severity: 'moderate',
+        date: '2024-12-10',
+        sourceUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2024-12236',
+      },
+      {
+        id: 'gemini-gmail-smart-features-lawsuit-2025',
+        text: 'A proposed class action filed in November 2025 alleges Gemini smart features were enabled for Gmail/Chat/Meet users without informed consent; claims remain unresolved.',
+        textDe: 'Eine im November 2025 eingereichte Sammelklage behauptet, dass Gemini-Smart-Features fuer Gmail-/Chat-/Meet-Nutzer ohne informierte Einwilligung aktiviert wurden; die Vorwuerfe sind nicht abschliessend entschieden.',
+        severity: 'moderate',
+        date: '2025-11-11',
+        sourceUrl: 'https://dockets.justia.com/docket/california/candce/5%3A2025cv09704/459505',
+      },
+      {
+        id: 'gemini-copyright-litigation-books-2023',
+        text: 'In re Google Generative AI Copyright Litigation includes allegations that Gemini training used copyrighted books without authorization; the case remains active.',
+        textDe: 'Die In-re-Google-Generative-AI-Copyright-Litigation enthaelt Vorwuerfe, dass fuer Gemini-Training urheberrechtlich geschuetzte Buecher ohne Autorisierung genutzt wurden; das Verfahren ist weiterhin anhaengig.',
+        severity: 'moderate',
+        date: '2023-07-11',
+        sourceUrl: 'https://cand.uscourts.gov/cases-e-filing/cases/523-cv-03440-ekl/re-google-generative-ai-copyright-litigation/',
+      },
+      {
+        id: 'gemini-global-outage-2025-09-29',
+        text: 'Google Workspace incident reporting documented a global Gemini outage of about 49 minutes in September 2025, highlighting residual availability risk.',
+        textDe: 'Das Google-Workspace-Incident-Reporting dokumentierte im September 2025 einen globalen Gemini-Ausfall von rund 49 Minuten und unterstreicht verbleibende Verfuegbarkeitsrisiken.',
+        severity: 'moderate',
+        date: '2025-09-29',
+        sourceUrl: 'https://www.google.com/appsstatus/dashboard/incidents/6GdahVtGTryxTdh56iLP',
+      },
+      {
+        id: 'gemini-ai-contractor-layoffs-2025',
+        text: 'Reporting in 2025 described large contractor layoffs across Google AI data-operations teams, signaling support-operations churn risk.',
+        textDe: 'Berichte aus 2025 beschrieben grosse Contractor-Entlassungen in Googles AI-Datenoperations-Teams und signalisieren Risiken durch operative Fluktuation.',
+        severity: 'minor',
+        date: '2025-09-15',
+        sourceUrl: 'https://www.wired.com/story/hundreds-of-google-ai-workers-were-fired-amid-fight-over-working-conditions/',
+      },
+    ],
+  },
   'apple-homekit': {
     trustScore: 4.6,
     description:
-      'US-operated smart-home ecosystem with strong cryptographic design and mature security operations, but trust is reduced by demonstrated spyware-chain targeting, ecosystem lock-in through architecture migration, and Siri/iCloud contractual privacy constraints.',
+        'US-operated smart-home ecosystem with strong cryptographic design and mature security operations, but trust is reduced by demonstrated spyware-chain targeting, ecosystem lock-in through architecture migration, and Siri/iCloud contractual privacy constraints.',
     descriptionDe:
-      'US-Smart-Home-Oekosystem mit starker kryptografischer Architektur und reifen Security-Prozessen; das Vertrauen sinkt jedoch durch dokumentierte Spyware-Chain-Targeting-Faelle, Lock-in durch Architektur-Migration sowie Siri-/iCloud-Vertrags- und Privacy-Risiken.',
+        'US-Smart-Home-Oekosystem mit starker kryptografischer Architektur und reifen Security-Prozessen; das Vertrauen sinkt jedoch durch dokumentierte Spyware-Chain-Targeting-Faelle, Lock-in durch Architektur-Migration sowie Siri-/iCloud-Vertrags- und Privacy-Risiken.',
     reservations: [
       {
         id: 'homekit-spyware-chain-pwnyourhome-2023',
@@ -604,12 +818,156 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  'amazon-alexa': {
+    trustScore: 2.2,
+    description:
+        'US-operated voice-assistant ecosystem with active security handling, but trust is heavily reduced by regulator-backed privacy failures, cloud-first data processing and training practices, third-party skill data-sharing exposure, and growing Alexa+ model dependency.',
+    descriptionDe:
+        'US-Voice-Assistant-Oekosystem mit aktivem Security-Handling, dessen Vertrauen jedoch durch regulatorisch belegte Privacy-Verstoesse, cloudzentrierte Verarbeitungs- und Trainingspraktiken, Exposition bei Drittanbieter-Skills und die wachsende Alexa+-Modellabhaengigkeit deutlich sinkt.',
+    reservations: [
+      {
+        id: 'alexa-cloud-service-voice-processing-by-design',
+        text: 'Amazon states that Alexa is a cloud service and that request recordings are sent to Amazon\'s cloud for processing, keeping core functionality cloud-dependent.',
+        textDe: 'Amazon gibt an, dass Alexa ein Cloud-Dienst ist und Anfragen als Aufnahmen zur Verarbeitung in die Amazon-Cloud gesendet werden, wodurch Kernfunktionen cloudabhaengig bleiben.',
+        severity: 'major',
+        sourceUrl: 'https://digprjsurvey.amazon.co.uk/csad/help/node/GVP69FUJ48X9DK8V',
+      },
+      {
+        id: 'alexa-voice-requests-used-for-ml-training',
+        text: 'Amazon states Alexa requests are used to train speech-recognition and language-understanding systems, including supervised learning with human review of a small sample.',
+        textDe: 'Amazon erklaert, dass Alexa-Anfragen zum Training von Sprach- und Sprachverstehenssystemen genutzt werden, einschliesslich ueberwachtem Lernen mit menschlicher Pruefung einer kleinen Stichprobe.',
+        severity: 'major',
+        sourceUrl: 'https://digprjsurvey.amazon.co.uk/csad/help/node/GVP69FUJ48X9DK8V',
+      },
+      {
+        id: 'alexa-ftc-coppa-order-2023',
+        text: 'The FTC/DOJ action in 2023 required Amazon to pay $25M and delete children\'s Alexa voice data over COPPA allegations, indicating a major regulator-backed privacy failure.',
+        textDe: 'Die FTC/DOJ-Massnahme von 2023 verpflichtete Amazon zu 25 Mio. USD Zahlung und zur Loeschung von Kinder-Sprachdaten aus Alexa wegen COPPA-Vorwuerfen und markiert ein schweres regulatorisch belegtes Privacy-Versagen.',
+        severity: 'major',
+        date: '2023-05-31',
+        sourceUrl: 'https://www.ftc.gov/news-events/news/press-releases/2023/05/ftc-doj-charge-amazon-violating-childrens-privacy-law-keeping-kids-alexa-voice-recordings-forever',
+      },
+      {
+        id: 'alexa-local-processing-option-removed-2025',
+        text: 'Amazon removed the "Do Not Send Voice Recordings" local-processing option for some Echo devices in March 2025, increasing mandatory cloud-processing exposure.',
+        textDe: 'Amazon entfernte im Maerz 2025 fuer bestimmte Echo-Geraete die lokale Option "Do Not Send Voice Recordings", wodurch die verpflichtende Cloud-Verarbeitungsexposition stieg.',
+        severity: 'major',
+        date: '2025-03-14',
+        sourceUrl: 'https://www.theverge.com/news/630049/amazon-echo-discontinues-do-not-send-voice-recording-setting',
+      },
+      {
+        id: 'alexa-privacy-setting-feature-tradeoff-2025',
+        text: 'Reporting on the 2025 Alexa change noted that stricter recording settings can disable Voice ID features, creating privacy-versus-functionality tradeoff pressure.',
+        textDe: 'Berichte zur Alexa-Aenderung 2025 nennen, dass strengere Recording-Einstellungen Voice-ID-Funktionen deaktivieren koennen und damit Privacy-versus-Functionality-Druck erzeugen.',
+        severity: 'moderate',
+        date: '2025-03-14',
+        sourceUrl: 'https://apnews.com/article/7fb3c19fa7f664bde5c5be259f8b23ee',
+      },
+      {
+        id: 'alexa-human-audio-review-history',
+        text: 'Bloomberg reported that Amazon teams reviewed selected Alexa recordings for quality improvement, highlighting long-running accountability risk for always-on home microphones.',
+        textDe: 'Bloomberg berichtete, dass Amazon-Teams ausgewaehlte Alexa-Aufnahmen zur Qualitaetsverbesserung prueften, was ein langlaufendes Accountability-Risiko bei Always-on-Heimmikrofonen zeigt.',
+        severity: 'major',
+        date: '2019-04-10',
+        sourceUrl: 'https://www.bloomberg.com/news/articles/2019-04-10/is-anyone-listening-to-you-on-alexa-a-global-team-reviews-audio',
+      },
+      {
+        id: 'alexa-class-action-recording-litigation',
+        text: 'US class-action litigation over Alexa recording and consent disclosures has remained active over multiple years, reinforcing unresolved transparency and consent risk.',
+        textDe: 'US-Sammelklagen zu Alexa-Aufzeichnungen und Einwilligungshinweisen liefen ueber mehrere Jahre weiter und verstaerken damit ungeloste Transparenz- und Consent-Risiken.',
+        severity: 'moderate',
+        date: '2022-11-09',
+        sourceUrl: 'https://law.justia.com/cases/federal/district-courts/washington/wawdce/2%3A2021cv00750/300264/91/',
+      },
+      {
+        id: 'alexa-skill-ecosystem-policy-violation-risk',
+        text: 'Independent research found widespread policy-violating patterns in Alexa Skills, indicating meaningful third-party ecosystem governance risk.',
+        textDe: 'Unabhaengige Forschung fand verbreitete Policy-verletzende Muster im Alexa-Skill-Oekosystem und zeigt damit ein relevantes Governance-Risiko durch Drittanbieter.',
+        severity: 'major',
+        sourceUrl: 'https://www.ndss-symposium.org/ndss-paper/hey-alexa-is-this-skill-safe-taking-a-closer-look-at-the-alexa-skill-ecosystem/',
+      },
+      {
+        id: 'alexa-web-api-voice-history-exposure-cve-2022-25809',
+        text: 'CVE-2022-25809 documented a vulnerability in Alexa APIs that could enable unauthorized access to user personal information and voice history before remediation.',
+        textDe: 'CVE-2022-25809 dokumentierte eine Schwachstelle in Alexa-APIs, die vor der Behebung unautorisierten Zugriff auf personenbezogene Daten und Sprachhistorie erlauben konnte.',
+        severity: 'major',
+        sourceUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2022-25809',
+      },
+      {
+        id: 'alexa-transcript-retention-and-residual-action-logs',
+        text: 'Amazon states that if users choose not to save voice recordings, text transcripts can still be retained for up to 30 days and records of Alexa actions may still be retained.',
+        textDe: 'Amazon erklaert, dass bei aktivierter Einstellung zum Nicht-Speichern von Sprachaufnahmen Texttranskripte dennoch bis zu 30 Tage gespeichert werden koennen und Aufzeichnungen ueber Alexa-Aktionen bestehen bleiben koennen.',
+        severity: 'major',
+        sourceUrl: 'https://digprjsurvey.amazon.co.uk/csad/help/node/GVP69FUJ48X9DK8V',
+      },
+      {
+        id: 'alexa-third-party-skill-data-sharing',
+        text: 'Amazon states that third-party Alexa skills receive request content (and optionally location data when granted), and resulting data handling is governed by developer privacy practices.',
+        textDe: 'Amazon gibt an, dass Drittanbieter-Skills Inhaltsdaten von Anfragen erhalten (und bei Freigabe auch Standortdaten), wobei die weitere Verarbeitung den Datenschutzpraktiken der Entwickler unterliegt.',
+        severity: 'major',
+        sourceUrl: 'https://digprjsurvey.amazon.co.uk/csad/help/node/GVP69FUJ48X9DK8V',
+      },
+      {
+        id: 'alexa-self-issuing-voice-command-risk',
+        text: 'Academic work demonstrated "self-issuing" voice-command attacks against Alexa and Google Home, showing non-trivial assistant attack surface beyond normal user intent.',
+        textDe: 'Wissenschaftliche Arbeiten demonstrierten "self-issuing"-Voice-Command-Angriffe gegen Alexa und Google Home und zeigen eine nicht triviale Assistant-Angriffsflaeche jenseits normaler Nutzerintention.',
+        severity: 'moderate',
+        sourceUrl: 'https://arxiv.org/abs/2202.08619',
+      },
+      {
+        id: 'alexa-plus-third-party-llm-dependency',
+        text: 'Alexa+ launch materials confirm Anthropic Claude integration, increasing dependency on third-party frontier-model infrastructure for core assistant behavior.',
+        textDe: 'Alexa+-Launch-Unterlagen bestaetigen die Integration von Anthropic Claude und erhoehen damit die Abhaengigkeit von Drittanbieter-Frontier-Modell-Infrastruktur fuer Kernverhalten des Assistenten.',
+        severity: 'moderate',
+        date: '2025-02-26',
+        sourceUrl: 'https://www.anthropic.com/news/claude-and-alexa-plus',
+      },
+      {
+        id: 'alexa-plus-pricing-and-feature-volatility-2025',
+        text: 'Alexa+ introduced a $19.99/month list price for non-Prime users and launched with some missing features in early access, reducing cost and roadmap predictability.',
+        textDe: 'Alexa+ fuehrte fuer Nicht-Prime-Nutzer einen Listenpreis von 19,99 USD/Monat ein und startete im Early Access mit teils fehlenden Funktionen, was Kosten- und Roadmap-Planbarkeit reduziert.',
+        severity: 'moderate',
+        date: '2025-02-26',
+        sourceUrl: 'https://www.cnbc.com/2025/02/26/amazon-unveils-long-awaited-alexa-revamped-with-ai-features.html',
+      },
+      {
+        id: 'alexa-plus-early-access-feature-gaps-2025',
+        text: 'The Verge reported that early Alexa+ access launched without several announced capabilities, signaling rollout maturity and reliability volatility during the transition.',
+        textDe: 'The Verge berichtete, dass Alexa+ im Early Access ohne mehrere angekuendigte Funktionen startete, was auf Volatilitaet bei Rollout-Reife und Zuverlaessigkeit waehrend der Umstellung hinweist.',
+        severity: 'moderate',
+        date: '2025-03-31',
+        sourceUrl: 'https://www.theverge.com/news/639697/amazon-alexa-plus-launch-early-access-missing-features',
+      },
+      {
+        id: 'alexa-division-layoffs-2023',
+        text: 'Amazon cut several hundred jobs in the Alexa organization in late 2023, signaling execution and support-capacity churn risk during a major product transition.',
+        textDe: 'Amazon strich Ende 2023 mehrere hundert Stellen in der Alexa-Organisation, was waehrend einer grossen Produktumstellung auf Risiken bei Umsetzung und Support-Kapazitaet hinweist.',
+        severity: 'moderate',
+        date: '2023-11-17',
+        sourceUrl: 'https://www.cnbc.com/2023/11/17/amazon-cuts-several-hundred-jobs-in-alexa-division.html',
+      },
+      {
+        id: 'alexa-no-public-alexa-specific-soc-attestation',
+        text: 'AWS provides SOC reporting at infrastructure level, but no publicly verifiable Alexa-specific SOC attestation artifact is published, limiting product-level assurance transparency.',
+        textDe: 'AWS stellt SOC-Reporting auf Infrastruktur-Ebene bereit, jedoch ist kein oeffentlich verifizierbares Alexa-spezifisches SOC-Attestierungsartefakt veroeffentlicht, was die produktbezogene Assurance-Transparenz begrenzt.',
+        severity: 'moderate',
+        sourceUrl: 'https://aws.amazon.com/compliance/soc-faqs/',
+      },
+      {
+        id: 'alexa-us-legal-process-exposure',
+        text: 'US law (18 U.S.C. 2713) can compel providers to disclose customer data under their control regardless of storage location, limiting strict sovereignty guarantees for US-headquartered voice ecosystems.',
+        textDe: 'US-Recht (18 U.S.C. 2713) kann Anbieter zur Offenlegung von Kundendaten unter ihrer Kontrolle unabhaengig vom Speicherort verpflichten und begrenzt damit strikte Souveraenitaetszusagen bei US-Hauptsitz-Voice-Oekosystemen.',
+        severity: 'major',
+        sourceUrl: 'https://www.law.cornell.edu/uscode/text/18/2713',
+      },
+    ],
+  },
   microsoft: {
     trustScore: 3.1,
     description:
-      'US-operated productivity suite with strong enterprise security programs and compliance artifacts, but trust is reduced by major cloud incident history, regulatory findings, and persistent US-jurisdiction sovereignty limits.',
+        'US-operated productivity suite with strong enterprise security programs and compliance artifacts, but trust is reduced by major cloud incident history, regulatory findings, and persistent US-jurisdiction sovereignty limits.',
     descriptionDe:
-      'US-betriebene Produktivitaetsplattform mit starken Enterprise-Sicherheitsprogrammen und Compliance-Artefakten, deren Vertrauen aber durch schwere Cloud-Incidents, regulatorische Befunde und fortbestehende Souveraenitaetsgrenzen unter US-Jurisdiktion reduziert wird.',
+        'US-betriebene Produktivitaetsplattform mit starken Enterprise-Sicherheitsprogrammen und Compliance-Artefakten, deren Vertrauen aber durch schwere Cloud-Incidents, regulatorische Befunde und fortbestehende Souveraenitaetsgrenzen unter US-Jurisdiktion reduziert wird.',
     reservations: [
       {
         id: 'microsoft-storm-0558-exchange-intrusion',
@@ -707,12 +1065,127 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  'microsoft-windows': {
+    trustScore: 2.3,
+    description:
+        'US-operated desktop OS with mature security engineering and patch cadence, but trust is reduced by sustained active-exploitation pressure, telemetry-heavy defaults, and US-jurisdiction sovereignty limits.',
+    descriptionDe:
+        'US-Desktop-Betriebssystem mit reifer Security-Engineering- und Patch-Cadence, dessen Vertrauen jedoch durch anhaltenden Active-Exploitation-Druck, telemetrielastige Defaults und Souveraenitaetsgrenzen unter US-Jurisdiktion sinkt.',
+    reservations: [
+      {
+        id: 'windows-storm-0558-vendor-trust-boundary',
+        text: 'CISA documented forged-token abuse in Storm-0558 against Microsoft identity/mail systems, which remains relevant for Windows environments coupled to Microsoft cloud identity and admin workflows.',
+        textDe: 'CISA dokumentierte bei Storm-0558 den Missbrauch gefaelschter Tokens gegen Microsoft-Identity-/Mail-Systeme; das bleibt fuer Windows-Umgebungen mit Microsoft-Cloud-Identity- und Admin-Workflows relevant.',
+        severity: 'major',
+        date: '2023-07-12',
+        sourceUrl: 'https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-193a',
+      },
+      {
+        id: 'windows-csrb-governance-findings-2024',
+        text: 'The US Cyber Safety Review Board described the Exchange Online intrusion as preventable and criticized Microsoft security governance and transparency.',
+        textDe: 'Das US Cyber Safety Review Board stufte die Exchange-Online-Intrusion als vermeidbar ein und kritisierte Microsofts Security-Governance sowie Transparenz.',
+        severity: 'major',
+        date: '2024-04-02',
+        sourceUrl: 'https://www.cisa.gov/resources-tools/resources/CSRB-Review-Summer-2023-MEO-Intrusion',
+      },
+      {
+        id: 'windows-midnight-blizzard-corporate-breach-2024',
+        text: 'Microsoft reported that the Midnight Blizzard actor accessed parts of corporate email, source code repositories, and internal systems in 2024.',
+        textDe: 'Microsoft berichtete 2024, dass die Gruppe Midnight Blizzard auf Teile von Unternehmens-E-Mail, Source-Code-Repositories und interne Systeme zugriff.',
+        severity: 'major',
+        date: '2024-03-08',
+        sourceUrl: 'https://www.microsoft.com/en-us/msrc/blog/2024/03/update-on-microsoft-actions-following-attack-by-nation-state-actor-midnight-blizzard/',
+      },
+      {
+        id: 'windows-edps-m365-infringement-2024',
+        text: 'The EDPS found that the European Commission\'s Microsoft 365 setup infringed EU-institution data-protection rules, highlighting transfer and purpose-limitation risk at Microsoft vendor boundary.',
+        textDe: 'Der EDPS stellte fest, dass die Microsoft-365-Nutzung der EU-Kommission gegen Datenschutzregeln fuer EU-Institutionen verstiess und damit Transfer- sowie Zweckbindungsrisiken an der Microsoft-Vendor-Boundary sichtbar machte.',
+        severity: 'major',
+        date: '2024-03-08',
+        sourceUrl: 'https://www.edps.europa.eu/data-protection/our-work/publications/investigations/2024-03-08-edps-investigation-european-commissions-use-microsoft-365_en',
+      },
+      {
+        id: 'windows-kev-active-exploitation-pressure',
+        text: 'CISA\'s Known Exploited Vulnerabilities catalog contains multiple Windows CVEs, indicating persistent in-the-wild exploitation pressure and tight patching requirements.',
+        textDe: 'Der CISA-Katalog der Known Exploited Vulnerabilities enthaelt mehrere Windows-CVEs und zeigt damit anhaltenden In-the-Wild-Ausnutzungsdruck sowie enge Patch-Anforderungen.',
+        severity: 'major',
+        sourceUrl: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
+      },
+      {
+        id: 'windows-diagnostic-data-and-tailored-experiences',
+        text: 'Microsoft documents required and optional Windows diagnostic data flows; optional signals can be used for product improvement and personalized experiences when enabled.',
+        textDe: 'Microsoft dokumentiert erforderliche und optionale Windows-Diagnosedatenfluesse; optionale Signale koennen bei Aktivierung fuer Produktverbesserung und personalisierte Erfahrungen genutzt werden.',
+        severity: 'moderate',
+        sourceUrl: 'https://privacy.microsoft.com/en-us/data-collection-windows',
+      },
+      {
+        id: 'windows-cross-border-transfer-disclosure',
+        text: 'Microsoft\'s privacy statement discloses international cross-border processing and transfer of personal data, which must be modeled in sovereignty risk assessments.',
+        textDe: 'Microsofts Privacy Statement nennt internationale grenzueberschreitende Verarbeitung und Uebermittlung personenbezogener Daten, was in Souveraenitaets-Risikoanalysen beruecksichtigt werden muss.',
+        severity: 'moderate',
+        sourceUrl: 'https://privacy.microsoft.com/en-us/privacystatement',
+      },
+      {
+        id: 'windows-us-legal-process-exposure',
+        text: 'US law (18 U.S.C. 2713) allows compelled disclosure of customer data under provider control regardless of where data is stored, limiting sovereignty guarantees for US-headquartered vendors.',
+        textDe: 'US-Recht (18 U.S.C. 2713) ermoeglicht die erzwungene Offenlegung von Kundendaten unter Provider-Kontrolle unabhaengig vom Speicherort und begrenzt damit Souveraenitaetszusagen bei US-Hauptsitz.',
+        severity: 'major',
+        sourceUrl: 'https://www.law.cornell.edu/uscode/text/18/2713',
+      },
+      {
+        id: 'windows-security-logging-tier-history-2023',
+        text: 'CISA stated that some critical Microsoft cloud security logs had required higher-cost licensing before broader logging access changes were rolled out.',
+        textDe: 'CISA stellte fest, dass einige kritische Microsoft-Cloud-Sicherheitslogs vor erweiterten Logging-Aenderungen nur mit hoeherpreisiger Lizenz verfuegbar waren.',
+        severity: 'moderate',
+        date: '2023-07-19',
+        sourceUrl: 'https://www.cisa.gov/news-events/news/cisa-and-microsoft-partnership-expands-access-logging-capabilities-broadly',
+      },
+      {
+        id: 'windows-cumulative-update-regression-risk',
+        text: 'Windows uses a cumulative servicing model and Microsoft publishes release-health known issues/safeguard holds, which indicates recurring update-regression risk that operators must plan for.',
+        textDe: 'Windows nutzt ein kumulatives Servicing-Modell und Microsoft veroeffentlicht Release-Health-Known-Issues bzw. Safeguard Holds, was wiederkehrende Update-Regressionsrisiken zeigt, die Betreiber einplanen muessen.',
+        severity: 'moderate',
+        sourceUrl: 'https://learn.microsoft.com/en-us/windows/release-health/',
+      },
+      {
+        id: 'windows-teams-bundling-antitrust-commitments-2025',
+        text: 'Microsoft accepted long-running EU antitrust commitments on Teams bundling, including suites without Teams and interoperability/data-portability obligations.',
+        textDe: 'Microsoft akzeptierte langlaufende EU-Antitrust-Verpflichtungen zur Teams-Buendelung, einschliesslich Suites ohne Teams sowie Interoperabilitaets- und Datenportabilitaetsauflagen.',
+        severity: 'moderate',
+        date: '2025-09-12',
+        sourceUrl: 'https://apnews.com/article/61a94a85f04df5183f2b8f81bc9468e5',
+      },
+      {
+        id: 'windows-copilot-pricing-accc-2025',
+        text: 'Australia\'s ACCC sued Microsoft over allegedly misleading Microsoft 365 subscribers about Copilot-linked price increases and downgrade options.',
+        textDe: 'Die australische ACCC verklagte Microsoft wegen mutmasslich irrefuehrender Kommunikation zu Copilot-bedingten Microsoft-365-Preiserhoehungen und Downgrade-Optionen.',
+        severity: 'moderate',
+        date: '2025-10-27',
+        sourceUrl: 'https://www.accc.gov.au/media-release/microsoft-in-court-for-allegedly-misleading-millions-of-australians-over-microsoft-365-subscriptions',
+      },
+      {
+        id: 'windows-10-end-of-support-migration-pressure',
+        text: 'Windows 10 support ended on October 14, 2025, creating lifecycle-driven migration/ESU pressure for organizations that could not transition in time.',
+        textDe: 'Der Support fuer Windows 10 endete am 14. Oktober 2025 und erzeugte lifecycle-bedingten Migrations-/ESU-Druck fuer Organisationen, die nicht rechtzeitig umstellen konnten.',
+        severity: 'moderate',
+        date: '2025-10-14',
+        sourceUrl: 'https://support.microsoft.com/en-us/windows/windows-10-support-ends-on-october-14-2025-2ca8b313-1946-43d3-b55c-2b95b107f281',
+      },
+      {
+        id: 'windows-services-agreement-content-license-scope',
+        text: 'Microsoft Services Agreement keeps user ownership but grants Microsoft broad rights needed to operate and improve services, which should be reviewed for sensitive data governance.',
+        textDe: 'Das Microsoft Services Agreement belaesst das Eigentum bei Nutzern, raeumt Microsoft aber breite Rechte zum Betrieb und zur Verbesserung von Diensten ein; fuer sensible Data-Governance sollte das explizit geprueft werden.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.microsoft.com/en-us/servicesagreement',
+      },
+    ],
+  },
   openai: {
     trustScore: 2.7,
     description:
-      'US-operated AI platform with strong enterprise security and compliance controls, but trust is reduced by consumer-tier training defaults, significant privacy enforcement, litigation-driven retention overrides, and notable incident history.',
+        'US-operated AI platform with strong enterprise security and compliance controls, but trust is reduced by consumer-tier training defaults, significant privacy enforcement, litigation-driven retention overrides, and notable incident history.',
     descriptionDe:
-      'US-AI-Plattform mit starken Enterprise-Security- und Compliance-Kontrollen, deren Vertrauen jedoch durch Trainings-Defaults im Consumer-Tier, signifikante Privacy-Verfahren, litigation-getriebene Retention-Overrides und relevante Incident-Historie sinkt.',
+        'US-AI-Plattform mit starken Enterprise-Security- und Compliance-Kontrollen, deren Vertrauen jedoch durch Trainings-Defaults im Consumer-Tier, signifikante Privacy-Verfahren, litigation-getriebene Retention-Overrides und relevante Incident-Historie sinkt.',
     reservations: [
       {
         id: 'openai-us-legal-process-exposure',
@@ -796,9 +1269,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   'google-search': {
     trustScore: 2.0,
     description:
-      'US-operated search platform with strong engineering depth, but ad-driven data monetization, AI training defaults, and major legal findings materially reduce trust.',
+        'US-operated search platform with strong engineering depth, but ad-driven data monetization, AI training defaults, and major legal findings materially reduce trust.',
     descriptionDe:
-      'US-Suchplattform mit starker technischer Reife, deren Vertrauen aber durch werbegetriebene Datennutzung, KI-Trainings-Defaults und schwere Rechtsbefunde deutlich sinkt.',
+        'US-Suchplattform mit starker technischer Reife, deren Vertrauen aber durch werbegetriebene Datennutzung, KI-Trainings-Defaults und schwere Rechtsbefunde deutlich sinkt.',
     reservations: [
       {
         id: 'search-ad-surveillance-business-model',
@@ -839,12 +1312,82 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+
+
+  bing: {
+    trustScore: 2.0,
+    description:
+        'US-operated web search and consumer AI assistant with strong platform engineering and rapid security patching, but trust is materially reduced by privacy enforcement actions, ad-targeting data use, consumer AI training defaults, and unresolved copyright litigation.',
+    descriptionDe:
+        'US-betriebene Websuche und Consumer-KI-Assistent mit starker Plattform-Engineering-Basis und schneller Security-Patch-Reaktion; das Vertrauen sinkt jedoch deutlich durch Privacy-Durchsetzung, werbliche Datennutzung, Consumer-AI-Trainings-Defaults und ungeloste Copyright-Litigation.',
+    reservations: [
+      {
+        id: 'bing-cookie-consent-fine-cnil-2022',
+        text: 'The French data protection authority fined Microsoft EUR 60M in 2022 over Bing cookie-consent flows where refusing tracking cookies was harder than accepting them.',
+        textDe: 'Die franzoesische Datenschutzaufsicht verhaengte 2022 eine Geldbusse von 60 Mio. EUR gegen Microsoft wegen Cookie-Consent-Flows bei Bing, bei denen Ablehnen schwieriger als Akzeptieren war.',
+        severity: 'major',
+        date: '2022-12-22',
+        sourceUrl: 'https://www.legifrance.gouv.fr/cnil/id/CNILTEXT000046773696',
+      },
+      {
+        id: 'bing-copilot-consumer-training-opt-out',
+        text: 'Microsoft privacy documentation says consumer Copilot conversations may be used to train generative AI models in certain markets unless users opt out.',
+        textDe: 'Microsofts Privacy Statement beschreibt, dass Copilot-Consumer-Konversationen in bestimmten Maerkten fuer das Training generativer KI genutzt werden koennen, sofern Nutzer nicht aktiv widersprechen.',
+        severity: 'major',
+        sourceUrl: 'https://www.microsoft.com/en-us/privacy/privacystatement',
+      },
+      {
+        id: 'bing-ad-personalization-from-search-and-activity-data',
+        text: 'Microsoft states ads shown in Bing and Microsoft properties may be selected using data such as search queries, location, interests, and product interactions.',
+        textDe: 'Microsoft gibt an, dass Anzeigen in Bing und Microsoft-Diensten unter anderem anhand von Suchanfragen, Standort, Interessen und Produktinteraktionen ausgewaehlt werden koennen.',
+        severity: 'major',
+        sourceUrl: 'https://www.microsoft.com/en-us/privacy/privacystatement',
+      },
+      {
+        id: 'bing-search-and-chat-history-retention',
+        text: 'Microsoft documents that Bing search and chat history can be stored and requires users to manually review and clear that history via dashboard/settings controls.',
+        textDe: 'Microsoft dokumentiert, dass Bing-Such- und Chatverlauf gespeichert werden kann und Nutzer den Verlauf ueber Dashboard/Settings aktiv pruefen und loeschen muessen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.microsoft.com/en-us/privacy/privacystatement',
+      },
+      {
+        id: 'bing-nyt-copyright-lawsuit-2023',
+        text: 'The New York Times sued Microsoft and OpenAI in late 2023 over alleged unauthorized use of journalism content for AI training and outputs.',
+        textDe: 'Die New York Times verklagte Microsoft und OpenAI Ende 2023 wegen mutmasslich nicht autorisierter Nutzung journalistischer Inhalte fuer KI-Training und -Outputs.',
+        severity: 'moderate',
+        date: '2023-12-27',
+        sourceUrl: 'https://apnews.com/article/6ea53a8ad3efa06ee4643b697df0ba57',
+      },
+      {
+        id: 'bing-lapsus-source-code-exposure-2022',
+        text: 'Microsoft confirmed in 2022 that the LAPSUS$ actor exfiltrated source code including Bing-related repositories; Microsoft stated no customer data was impacted.',
+        textDe: 'Microsoft bestaetigte 2022, dass die LAPSUS$-Gruppe Quellcode inklusive Bing-bezogener Repositories exfiltrierte; laut Microsoft waren keine Kundendaten betroffen.',
+        severity: 'moderate',
+        date: '2022-03-23',
+        sourceUrl: 'https://techcrunch.com/2022/03/23/microsoft-lapsus-hack-source-code/',
+      },
+      {
+        id: 'bing-critical-rce-cve-2025-21355',
+        text: 'Microsoft tracked a critical Bing remote-code-execution issue as CVE-2025-21355, underscoring ongoing patch-dependence for security-sensitive search infrastructure.',
+        textDe: 'Microsoft fuehrte mit CVE-2025-21355 eine kritische Bing-Remote-Code-Execution-Schwachstelle; sicherheitskritische Search-Infrastruktur bleibt damit patch-abhaengig.',
+        severity: 'moderate',
+        sourceUrl: 'https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-21355',
+      },
+      {
+        id: 'bing-user-complaints-quality-and-support',
+        text: 'Public Bing reviews report recurring complaints about spammy results, intrusive product integration, and weak support response quality.',
+        textDe: 'Oeffentliche Bing-Bewertungen nennen wiederkehrende Beschwerden zu spamartigen Ergebnissen, aufdringlicher Produktintegration und schwacher Support-Qualitaet.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.trustpilot.com/review/www.bing.com',
+      },
+    ],
+  },
   asana: {
     trustScore: 4.2,
     description:
-      'US-operated project management platform with strong compliance and security tooling, but trust is reduced by a recent cross-tenant MCP exposure incident, enterprise-tier portability limits, and governance/business-pressure signals.',
+        'US-operated project management platform with strong compliance and security tooling, but trust is reduced by a recent cross-tenant MCP exposure incident, enterprise-tier portability limits, and governance/business-pressure signals.',
     descriptionDe:
-      'US-Projektmanagement-Plattform mit starker Compliance- und Security-Tooling-Basis; das Vertrauen sinkt jedoch durch einen juengsten MCP-Cross-Tenant-Exposure-Vorfall, tier-gebundene Portabilitaetsgrenzen und Governance-/Business-Risikofaktoren.',
+        'US-Projektmanagement-Plattform mit starker Compliance- und Security-Tooling-Basis; das Vertrauen sinkt jedoch durch einen juengsten MCP-Cross-Tenant-Exposure-Vorfall, tier-gebundene Portabilitaetsgrenzen und Governance-/Business-Risikofaktoren.',
     reservations: [
       {
         id: 'asana-mcp-cross-tenant-exposure-2025',
@@ -908,12 +1451,354 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  atlassian: {
+    trustScore: 4.0,
+    description:
+        'US-operated work-management ecosystem with mature security/compliance programs and relatively transparent incident reporting, but trust is reduced by lifecycle-driven lock-in (Server end-of-support, Data Center EOL, Connect-to-Forge migration), historical high-impact availability failures, and billing/renewal mechanics that can reduce long-term cost predictability.',
+    descriptionDe:
+        'US-betriebenes Work-Management-Oekosystem mit reifen Security-/Compliance-Programmen und vergleichsweise transparenter Incident-Kommunikation; das Vertrauen sinkt jedoch durch lifecycle-getriebenes Lock-in (Server-End-of-Support, Data-Center-EOL, Connect-zu-Forge-Migration), historisch hochrelevante Verfuegbarkeitsausfaelle sowie Billing-/Renewal-Mechaniken mit reduzierter langfristiger Kostenplanbarkeit.',
+    reservations: [
+      {
+        id: 'atlassian-server-end-of-support-2024',
+        text: 'Atlassian Server support ended on February 15, 2024, and unsupported deployments no longer receive regular security fixes, increasing lifecycle and security exposure for holdout environments.',
+        textDe: 'Der Atlassian-Server-Support endete am 15. Februar 2024; nicht migrierte Deployments erhalten keine regulaeren Security-Fixes mehr, was Lifecycle- und Sicherheitsrisiken erhoeht.',
+        severity: 'major',
+        date: '2024-02-15',
+        sourceUrl: 'https://www.atlassian.com/licensing/server-end-of-support',
+      },
+      {
+        id: 'atlassian-data-center-end-of-life-2029',
+        text: 'Atlassian published a Data Center end-of-life timeline through March 28, 2029 with phased wind-down milestones, creating long-horizon migration pressure for sovereignty-sensitive buyers.',
+        textDe: 'Atlassian veroeffentlichte eine Data-Center-End-of-Life-Timeline bis zum 28. Maerz 2029 mit abgestuften Wind-down-Meilensteinen, was fuer souveraenitaetssensible Kunden langfristigen Migrationsdruck erzeugt.',
+        severity: 'major',
+        date: '2029-03-28',
+        sourceUrl: 'https://www.atlassian.com/licensing/data-center-end-of-life',
+      },
+      {
+        id: 'jira-april-2022-major-outage',
+        text: 'Atlassian\'s post-incident review states 775 cloud customers were affected in April 2022, with some experiencing up to 14 days of service disruption.',
+        textDe: 'Der Atlassian-Post-Incident-Review nennt fuer April 2022 insgesamt 775 betroffene Cloud-Kunden; einige Instanzen waren bis zu 14 Tage beeintraechtigt.',
+        severity: 'major',
+        date: '2022-04-05',
+        sourceUrl: 'https://www.atlassian.com/blog/atlassian-engineering/post-incident-review-april-2022-outage',
+      },
+      {
+        id: 'jira-server-dc-cve-2021-26086-kev-signal',
+        text: 'NVD metadata for CVE-2021-26086 indicates CISA KEV catalog inclusion, underscoring real-world exploitation pressure against unpatched Jira Server/Data Center deployments.',
+        textDe: 'NVD-Metadaten zu CVE-2021-26086 zeigen die Aufnahme in den CISA-KEV-Katalog und unterstreichen realen Ausnutzungsdruck gegen ungepatchte Jira-Server-/Data-Center-Deployments.',
+        severity: 'major',
+        date: '2024-11-12',
+        sourceUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2021-26086',
+      },
+      {
+        id: 'jira-server-dc-cve-2025-22167',
+        text: 'CVE-2025-22167 records another high-impact Jira Data Center/Server vulnerability class in 2025, reinforcing ongoing patch-management pressure for self-managed deployments.',
+        textDe: 'CVE-2025-22167 dokumentiert 2025 eine weitere hochrelevante Jira-Data-Center-/Server-Schwachstellenklasse und verstaerkt den laufenden Patch-Management-Druck fuer selbstverwaltete Deployments.',
+        severity: 'moderate',
+        date: '2025-01-21',
+        sourceUrl: 'https://www.cve.org/CVERecord?id=CVE-2025-22167',
+      },
+      {
+        id: 'atlassian-envoy-third-party-incident-2023',
+        text: 'Atlassian disclosed a 2023 incident tied to the third-party office-management vendor Envoy involving compromised Atlassian-related data, highlighting supplier-risk exposure outside core product infrastructure.',
+        textDe: 'Atlassian legte 2023 einen Vorfall beim Drittanbieter Envoy offen, bei dem Atlassian-bezogene Daten kompromittiert wurden; das unterstreicht Supplier-Risiken ausserhalb der Kernprodukt-Infrastruktur.',
+        severity: 'moderate',
+        date: '2023-02-23',
+        sourceUrl: 'https://community.atlassian.com/forums/Trust-Security-discussions/Atlassian-s-response-to-the-Envoy-Data-Incident/td-p/2280650',
+      },
+      {
+        id: 'atlassian-data-residency-scope-limitations',
+        text: 'Atlassian states data residency applies to in-scope app data only; multiple data classes remain out of scope (for example user account information, some logs, and some marketplace/app data).',
+        textDe: 'Atlassian gibt an, dass Data Residency nur fuer in-scope App-Daten gilt; mehrere Datenklassen bleiben out of scope (z. B. User-Account-Informationen, bestimmte Logs und Teile von Marketplace-/App-Daten).',
+        severity: 'major',
+        sourceUrl: 'https://support.atlassian.com/security-and-access-policies/docs/understand-data-residency/',
+      },
+      {
+        id: 'atlassian-data-residency-move-downtime-impact',
+        text: 'Atlassian documents that data-residency moves can involve app downtime (up to 24 hours) and temporary search degradation (up to around 3 days), creating operational migration risk.',
+        textDe: 'Atlassian dokumentiert, dass Data-Residency-Moves App-Downtime (bis zu 24 Stunden) und temporaere Such-Einschraenkungen (bis zu etwa 3 Tage) verursachen koennen; das erzeugt operative Migrationsrisiken.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.atlassian.com/security-and-access-policies/docs/move-data-to-another-location/',
+      },
+      {
+        id: 'atlassian-audit-log-data-not-pinnable',
+        text: 'Atlassian states that data residency is not available for audit-log activity data, which can limit strict in-region compliance models.',
+        textDe: 'Atlassian nennt, dass Data Residency fuer Audit-Log-Aktivitaetsdaten nicht verfuegbar ist, was strikte In-Region-Compliance-Modelle einschraenken kann.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.atlassian.com/security-and-access-policies/docs/move-data-to-another-location/',
+      },
+      {
+        id: 'trello-profile-enumeration-abuse-2024',
+        text: 'Atlassian documented abuse of Trello public profile lookups using external email lists and subsequently tightened unauthenticated API behavior, highlighting identifier-enumeration risk in the broader Atlassian ecosystem.',
+        textDe: 'Atlassian dokumentierte Missbrauch von oeffentlichen Trello-Profil-Lookups mit externen E-Mail-Listen und verschaerfte danach das unauthentifizierte API-Verhalten; das zeigt Identifier-Enumeration-Risiken im breiteren Atlassian-Oekosystem.',
+        severity: 'moderate',
+        date: '2024-01-23',
+        sourceUrl: 'https://community.atlassian.com/forums/Trello-articles/Setting-the-record-straight-about-Trello-user-profile-data/ba-p/2587253',
+      },
+      {
+        id: 'atlassian-dual-class-voting-concentration-2025',
+        text: 'Atlassian\'s annual filing discloses dual-class voting rights with Class B shares carrying 10 votes each and concentrated voting control, reducing governance flexibility for minority stakeholders.',
+        textDe: 'Der Atlassian-Jahresbericht offenlegt ein Dual-Class-Stimmrecht mit 10 Stimmen je Class-B-Aktie und stark konzentrierter Voting-Control, was die Governance-Flexibilitaet fuer Minderheitsstakeholder reduziert.',
+        severity: 'moderate',
+        date: '2025-12-31',
+        sourceUrl: 'https://www.sec.gov/Archives/edgar/data/0001650372/000165037226000011/team-20251231.htm',
+      },
+      {
+        id: 'atlassian-connect-end-of-support-2026',
+        text: 'Atlassian announced Connect end-of-support milestones and a Forge-first app model, creating migration burden and platform-dependency risk for existing ecosystem vendors.',
+        textDe: 'Atlassian kuendigte Connect-End-of-Support-Meilensteine und ein Forge-first-App-Modell an; das erzeugt Migrationsaufwand und Plattformabhaengigkeitsrisiken fuer bestehende Ecosystem-Anbieter.',
+        severity: 'moderate',
+        date: '2025-03-17',
+        sourceUrl: 'https://www.atlassian.com/blog/developer/announcing-connect-end-of-support-timeline-and-next-steps',
+      },
+      {
+        id: 'atlassian-automatic-renewal-current-rates',
+        text: 'Atlassian Customer Agreement terms describe automatic renewal at then-current rates and generally non-refundable payments, requiring active procurement controls to avoid cost surprises.',
+        textDe: 'Die Bedingungen des Atlassian Customer Agreement beschreiben automatische Verlaengerung zu dann gueltigen Preisen und grundsaetzlich nicht rueckerstattbare Zahlungen; ohne aktive Procurement-Kontrollen drohen Kostenueberraschungen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.atlassian.com/legal/atlassian-customer-agreement',
+      },
+      {
+        id: 'atlassian-maximum-quantity-billing-2025',
+        text: 'Atlassian\'s maximum-quantity billing update can bill customers based on peak user quantity during a cycle and does not issue in-cycle credits for seat reductions, increasing spend-volatility risk.',
+        textDe: 'Das Atlassian-Update zu Maximum-Quantity-Billing kann Kunden auf Basis der Spitzenanzahl von Nutzern im Abrechnungszeitraum belasten und sieht keine In-Cycle-Credits fuer Seat-Reduktionen vor; das erhoeht das Risiko von Ausgabenvolatilitaet.',
+        severity: 'moderate',
+        date: '2025-05-27',
+        sourceUrl: 'https://www.atlassian.com/blog/announcements/maximum-quantity-billing',
+      },
+      {
+        id: 'atlassian-status-incident-frequency-2026',
+        text: 'Atlassian\'s public status history shows recurring incidents, including disruption windows in early 2026, indicating non-trivial continuity risk for organizations with Jira as a critical operational dependency.',
+        textDe: 'Die oeffentliche Atlassian-Statushistorie zeigt wiederkehrende Incidents, einschliesslich Disruptionsfenstern Anfang 2026; das signalisiert ein relevantes Kontinuitaetsrisiko fuer Organisationen mit Jira als kritischer Betriebsabhaengigkeit.',
+        severity: 'moderate',
+        date: '2026-02-03',
+        sourceUrl: 'https://status.atlassian.com/history',
+      },
+    ],
+  },
+  discord: {
+    trustScore: 2.8,
+    description:
+        'US-operated communications platform with active security response and mandatory end-to-end encryption for audio/video from March 2026, but trust is reduced by the 2025 third-party support breach involving ID data, expanded age-assurance workflows, and recurring governance/reliability friction.',
+    descriptionDe:
+        'US-Kommunikationsplattform mit aktiver Security-Response und verpflichtender Ende-zu-Ende-Verschluesselung fuer Audio/Video ab Maerz 2026; das Vertrauen sinkt jedoch durch den Drittanbieter-Breach 2025 mit ID-Daten, ausgeweitete Age-Assurance-Prozesse sowie wiederkehrende Governance- und Reliability-Reibungen.',
+    reservations: [
+      {
+        id: 'discord-third-party-support-vendor-breach-2025',
+        text: 'Discord disclosed a 2025 incident where an unauthorized party compromised third-party support vendor 5CA, exposing ticket data for affected users, including government-ID photos for a subset.',
+        textDe: 'Discord legte 2025 einen Vorfall offen, bei dem ein unbefugter Akteur den Third-Party-Support-Anbieter 5CA kompromittierte und Ticket-Daten betroffener Nutzer exponierte, inklusive Ausweisfotos fuer einen Teil der Faelle.',
+        severity: 'major',
+        date: '2025-10-03',
+        sourceUrl: 'https://discord.com/press-releases/update-on-security-incident-involving-third-party-customer-service',
+      },
+      {
+        id: 'discord-age-assurance-id-face-verification-rollout-2026',
+        text: 'Discord\'s global teen-by-default rollout introduces age-assurance pathways that can require government ID or facial age estimation for access to age-restricted features.',
+        textDe: 'Der globale Teen-by-Default-Rollout von Discord fuehrt Age-Assurance-Pfade ein, die fuer den Zugriff auf altersbeschraenkte Funktionen einen amtlichen Ausweis oder eine Gesichtsaltersschaetzung verlangen koennen.',
+        severity: 'major',
+        date: '2026-02-09',
+        sourceUrl: 'https://discord.com/press-releases/discord-launches-teen-by-default-settings-globally',
+      },
+      {
+        id: 'discord-public-post-retention-ml-training-window',
+        text: 'Discord\'s retention policy says deleted public posts may be retained for 180 days to two years to help train systems that proactively detect policy-violating content.',
+        textDe: 'Laut Discord-Retention-Policy koennen geloeschte oeffentliche Posts fuer 180 Tage bis zu zwei Jahre aufbewahrt werden, um Systeme zur proaktiven Erkennung von Policy-Verstoessen zu trainieren.',
+        severity: 'major',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/5431812448791',
+      },
+      {
+        id: 'discord-age-inference-model-behavioral-signals-2026',
+        text: 'Discord states its age-inference model uses account behavior and related signals, and users with insufficient model confidence are pushed into explicit age-assurance flows for adult-access features.',
+        textDe: 'Discord gibt an, dass das Age-Inference-Modell Verhaltens- und weitere accountbezogene Signale nutzt; bei unzureichender Modell-Confidence werden Nutzer in explizite Age-Assurance-Flows fuer Adult-Features gefuehrt.',
+        severity: 'moderate',
+        date: '2026-02-11',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/38332670254231-Age-Assurance-Update-FAQ',
+      },
+      {
+        id: 'discord-us-processing-and-jurisdiction-exposure',
+        text: 'Discord states it processes and stores user information in the United States, including legal-process disclosures for law enforcement and national-security requests.',
+        textDe: 'Discord gibt an, Nutzerinformationen in den USA zu verarbeiten und zu speichern, einschliesslich Offenlegungen bei gesetzlichen Anfragen von Strafverfolgung und nationaler Sicherheit.',
+        severity: 'major',
+        sourceUrl: 'https://discord.com/privacy',
+      },
+      {
+        id: 'discord-nj-consumer-fraud-complaint-2025',
+        text: 'New Jersey filed a consumer-fraud complaint in April 2025 alleging Discord misrepresented child-safety controls; Discord disputes the allegations and litigation remains unresolved.',
+        textDe: 'New Jersey reichte im April 2025 eine Consumer-Fraud-Beschwerde ein und wirft Discord irrefuehrende Darstellungen zu Kinderschutzfunktionen vor; Discord bestreitet die Vorwuerfe und das Verfahren ist offen.',
+        severity: 'moderate',
+        date: '2025-04-17',
+        sourceUrl: 'https://www.nj.gov/oag/newsreleases25/2025-0417_Discord_Complaint.pdf',
+      },
+      {
+        id: 'discord-age-appeal-id-retention-up-to-60-days',
+        text: 'Discord states that ID submitted for age-verification appeals may be retained for up to 60 days after the appeal ticket closes.',
+        textDe: 'Discord gibt an, dass fuer Age-Verification-Appeals eingereichte Ausweise bis zu 60 Tage nach Schliessung des Appeal-Tickets gespeichert werden koennen.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/5431812448791',
+      },
+      {
+        id: 'discord-support-case-data-retention-five-years',
+        text: 'Discord\'s retention documentation says information tied to direct support requests may be retained for five years after closure for dispute and legal-rights purposes.',
+        textDe: 'Die Retention-Dokumentation von Discord nennt, dass Informationen zu direkten Supportanfragen nach Abschluss fuer Streit- und Rechtsverteidigungszwecke bis zu fuenf Jahre gespeichert werden koennen.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/5431812448791',
+      },
+      {
+        id: 'discord-e2ee-scope-gaps-stage-and-previews',
+        text: 'Discord\'s E2EE A/V documentation states stage channels are not end-to-end encrypted and Go Live stream previews are not end-to-end encrypted.',
+        textDe: 'Die E2EE-A/V-Dokumentation von Discord nennt, dass Stage-Channels nicht ende-zu-ende verschluesselt sind und Go-Live-Stream-Previews ebenfalls nicht ende-zu-ende verschluesselt sind.',
+        severity: 'moderate',
+        date: '2026-02-03',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/25968222946071-End-to-End-Encryption-for-Audio-and-Video',
+      },
+      {
+        id: 'discord-zdi-0day-cve-2026-0776',
+        text: 'The Zero Day Initiative published ZDI-26-040 (CVE-2026-0776), describing a local privilege-escalation issue in Discord Client and a dispute over vendor bug-bounty scope before disclosure.',
+        textDe: 'Die Zero Day Initiative veroeffentlichte ZDI-26-040 (CVE-2026-0776) zu einer lokalen Privilege-Escalation im Discord-Client und beschrieb vor der Offenlegung einen Streit um den Vendor-Bounty-Scope.',
+        severity: 'moderate',
+        date: '2026-01-09',
+        sourceUrl: 'https://www.zerodayinitiative.com/advisories/ZDI-26-040/',
+      },
+      {
+        id: 'discord-recurring-api-voice-incidents-2025-2026',
+        text: 'Discord\'s public status history documents repeated API, message-send, and voice/video incidents across late 2025 and January 2026, indicating ongoing reliability pressure.',
+        textDe: 'Die oeffentliche Status-Historie von Discord dokumentiert wiederholte API-, Message-Send- sowie Voice/Video-Incidents in Spaet-2025 und Januar-2026 und zeigt damit anhaltenden Reliability-Druck.',
+        severity: 'moderate',
+        date: '2026-01-27',
+        sourceUrl: 'https://discordstatus.com/history.rss',
+      },
+      {
+        id: 'discord-nitro-cancellation-device-path-dependency',
+        text: 'Discord notes that many subscription cancellations must be performed on the same device type used for purchase, adding practical friction when account access is disrupted.',
+        textDe: 'Discord weist darauf hin, dass viele Abo-Kuendigungen auf demselben Geraetetyp wie beim Kauf erfolgen muessen, was bei gestoertem Account-Zugriff praktische Reibung erzeugt.',
+        severity: 'minor',
+        sourceUrl: 'https://support.discord.com/hc/en-us/articles/19580873036695-How-to-Cancel-your-Nitro-Subscription',
+      },
+    ],
+  },
+  notion: {
+    trustScore: 4.6,
+    description:
+        'US-operated collaboration workspace with strong compliance signaling and mature enterprise controls, but trust is reduced by AI-agent prompt-injection exposure risk, partial data-residency scope, and portability/support friction.',
+    descriptionDe:
+        'US-Collaboration-Workspace mit starken Compliance-Signalen und reifen Enterprise-Kontrollen; das Vertrauen sinkt jedoch durch AI-Agent-Prompt-Injection-Exfiltrationsrisiken, nur teilweise Data-Residency-Abdeckung sowie Portabilitaets- und Support-Reibung.',
+    reservations: [
+      {
+        id: 'notion-agent-prompt-injection-exfiltration-risk',
+        text: 'Public 2025 reporting showed Notion AI agent workflows could be manipulated via hidden prompts to exfiltrate sensitive workspace data through tool access; vendor mitigations reduce but do not remove architecture-level risk.',
+        textDe: 'Oeffentliche Berichte aus 2025 zeigten, dass Notion-AI-Agent-Workflows ueber versteckte Prompts zur Exfiltration sensibler Workspace-Daten via Tool-Access verleitet werden konnten; Vendor-Mitigations reduzieren das Risiko, beseitigen es aber nicht auf Architektur-Ebene.',
+        severity: 'major',
+        sourceUrl: 'https://the-decoder.com/notion-ai-can-be-manipulated-to-leak-sensitive-data-via-hidden-prompts/',
+      },
+      {
+        id: 'notion-data-residency-scope-limitations',
+        text: 'Notion data residency is scoped to selected data classes at rest; account metadata, billing/usage data, analytics, and products like Notion Calendar and Notion Mail are outside the core residency scope.',
+        textDe: 'Die Notion-Data-Residency ist auf ausgewaehlte Datenklassen at rest begrenzt; Account-Metadaten, Billing-/Usage-Daten, Analytics sowie Produkte wie Notion Calendar und Notion Mail liegen ausserhalb des Kern-Scopes.',
+        severity: 'major',
+        sourceUrl: 'https://www.notion.com/help/data-residency',
+      },
+      {
+        id: 'notion-ai-non-enterprise-retention-window',
+        text: 'Notion AI security guidance states that non-enterprise AI processing may involve up to 30-day retention at model-provider level, while stricter zero-retention controls are tied to enterprise configurations.',
+        textDe: 'Die Notion-AI-Sicherheitsdokumentation nennt fuer Non-Enterprise-Kunden eine moegliche Retention von bis zu 30 Tagen auf Model-Provider-Ebene; strengere Zero-Retention-Kontrollen sind an Enterprise-Konfigurationen gebunden.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.notion.com/help/notion-ai-security-practices',
+      },
+      {
+        id: 'notion-export-fidelity-and-migration-friction',
+        text: 'Workspace export relies on Markdown/CSV/HTML conversion paths that can create migration-fidelity gaps for complex relational content structures.',
+        textDe: 'Workspace-Exporte basieren auf Markdown-/CSV-/HTML-Konvertierungen, was bei komplexen relationalen Content-Strukturen zu Migrations- und Formatfidelitaetsluecken fuehren kann.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.notion.com/help/export-your-content',
+      },
+      {
+        id: 'notion-post-termination-data-retrieval-window',
+        text: 'Notion Master Subscription Agreement terms document a limited post-termination data retrieval window before deletion can proceed, requiring proactive exit planning.',
+        textDe: 'Die Bedingungen des Notion Master Subscription Agreement dokumentieren ein begrenztes Datenabholfenster nach Vertragsbeendigung, bevor eine Loeschung erfolgen kann; das erfordert proaktive Exit-Planung.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.notion.so/notion/Master-Subscription-Agreement-4e1c5dd3e3de45dfa4a8ed60f1a43da0',
+      },
+      {
+        id: 'notion-local-mcp-repo-support-limits',
+        text: 'The local Notion MCP server repository states it is not actively monitored and may be sunset, reducing long-term predictability for teams relying on that open repository path.',
+        textDe: 'Das lokale Notion-MCP-Server-Repository gibt an, nicht aktiv ueberwacht zu werden und kuenftig eingestellt werden zu koennen; das reduziert die langfristige Planbarkeit fuer Teams, die diesen Open-Repo-Pfad nutzen.',
+        severity: 'moderate',
+        sourceUrl: 'https://github.com/makenotion/notion-mcp-server',
+      },
+      {
+        id: 'notion-status-incident-frequency-signal',
+        text: 'Notion publishes recurring service incidents on its public status history, which indicates meaningful operational interruption risk for critical centralized workflows.',
+        textDe: 'Notion veroeffentlicht wiederkehrende Service-Incidents in der oeffentlichen Status-Historie, was auf ein relevantes Unterbrechungsrisiko fuer kritische zentralisierte Workflows hinweist.',
+        severity: 'moderate',
+        sourceUrl: 'https://status.notion.so/history',
+      },
+      {
+        id: 'notion-statusgator-component-incident-corroboration',
+        text: 'StatusGator independently aggregates repeated Notion incident reports across component surfaces (including API, apps, and calendar), corroborating non-trivial interruption frequency.',
+        textDe: 'StatusGator aggregiert unabhaengig wiederholte Notion-Incident-Meldungen ueber mehrere Komponentenflaechen (u. a. API, Apps und Calendar) und stuetzt damit eine nicht triviale Unterbrechungsfrequenz.',
+        severity: 'moderate',
+        sourceUrl: 'https://statusgator.com/services/notion',
+      },
+      {
+        id: 'notion-billing-and-support-complaint-pattern',
+        text: 'Public review patterns include recurring complaints about billing handling and support responsiveness, adding procurement-trust friction for paid plans.',
+        textDe: 'Oeffentliche Review-Muster enthalten wiederkehrende Beschwerden zu Billing-Abwicklung und Support-Reaktionszeit, was bei kostenpflichtigen Plaenen Procurement-Trust-Reibung erzeugt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.trustpilot.com/review/notion.so',
+      },
+      {
+        id: 'notion-bbb-complaint-pattern',
+        text: 'BBB complaint records show recurring billing and support dispute themes, reinforcing procurement-trust friction for paid contracts.',
+        textDe: 'BBB-Beschwerdeeintraege zeigen wiederkehrende Themen zu Billing- und Support-Streitfaellen und verstaerken damit Procurement-Trust-Reibung bei kostenpflichtigen Vertraegen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.bbb.org/us/ca/san-francisco/profile/internet-service/notion-labs-inc-1116-927802',
+      },
+      {
+        id: 'notion-seat-billing-and-proration-friction',
+        text: 'Notion pricing/billing FAQ states added members create prorated charges while removed members do not receive in-cycle credits, which can create spend-volatility for seat-governance.',
+        textDe: 'Die Notion-Preis-/Billing-FAQ nennt, dass hinzugefuegte Mitglieder proratisierte Kosten ausloesen, waehrend entfernte Mitglieder keine In-Cycle-Gutschrift erhalten; das kann fuer Seat-Governance zu Ausgabenvolatilitaet fuehren.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.notion.com/pricing',
+      },
+      {
+        id: 'notion-promptarmor-disclosure-triage-friction-2026',
+        text: 'PromptArmor\'s disclosure timeline says the Notion AI exfiltration finding was initially triaged as not applicable before direct escalation and remediation deployment, indicating disclosure-process friction.',
+        textDe: 'Die Disclosure-Timeline von PromptArmor beschreibt, dass der Notion-AI-Exfiltrationsbefund zunaechst als nicht anwendbar triagiert wurde, bevor eine direkte Eskalation und Remediation erfolgte; das zeigt Reibung im Disclosure-Prozess.',
+        severity: 'moderate',
+        date: '2026-01-08',
+        sourceUrl: 'https://www.promptarmor.com/resources/notion-ai-unpatched-data-exfiltration',
+      },
+      {
+        id: 'notion-aws-infrastructure-concentration',
+        text: 'Notion data-residency documentation names AWS regions for primary and backup data placement, which introduces infrastructure concentration/dependency risk for strict sovereignty requirements.',
+        textDe: 'Die Notion-Data-Residency-Dokumentation nennt AWS-Regionen fuer primaere und Backup-Datenablage und erzeugt damit ein Infrastruktur-Konzentrations- bzw. Abhaengigkeitsrisiko bei strikten Souveraenitaetsanforderungen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.notion.com/help/data-residency',
+      },
+      {
+        id: 'notion-patent-litigation-tg-2006-2025',
+        text: 'A 2025 patent case (TG-2006 Holdings LLC v. Notion Labs Inc.) adds ongoing legal-overhang risk, even though patent litigation alone does not prove product-level user harm.',
+        textDe: 'Ein Patentverfahren aus 2025 (TG-2006 Holdings LLC v. Notion Labs Inc.) erzeugt ein fortlaufendes Legal-Overhang-Risiko, auch wenn Patentklagen allein keinen produktseitigen Nutzerschaden belegen.',
+        severity: 'minor',
+        date: '2025-09-12',
+        sourceUrl: 'https://dockets.justia.com/docket/delaware/dedce/1:2025cv01164/88158',
+      },
+      {
+        id: 'notion-desktop-cve-2024-23743',
+        text: 'CVE-2024-23743 documented a low-severity local issue in Notion for macOS prior to patched releases.',
+        textDe: 'CVE-2024-23743 dokumentierte vor gepatchten Releases ein Low-Severity-Local-Issue in Notion fuer macOS.',
+        severity: 'minor',
+        date: '2024-01-26',
+        sourceUrl: 'https://www.cve.org/CVERecord?id=CVE-2024-23743',
+      },
+    ],
+  },
   vimeo: {
     trustScore: 4.4,
     description:
-      'US-operated video platform with strong security/compliance signaling and clear creator-content ownership language, but trust is reduced by post-acquisition workforce shock, pricing/renewal friction, and portability/support risks.',
+        'US-operated video platform with strong security/compliance signaling and clear creator-content ownership language, but trust is reduced by post-acquisition workforce shock, pricing/renewal friction, and portability/support risks.',
     descriptionDe:
-      'US-Video-Plattform mit starken Security-/Compliance-Signalen und klarer Content-Ownership-Position fuer Creator; das Vertrauen sinkt jedoch durch den Personalabbau nach der Uebernahme, Pricing-/Renewal-Reibung sowie Portabilitaets- und Support-Risiken.',
+        'US-Video-Plattform mit starken Security-/Compliance-Signalen und klarer Content-Ownership-Position fuer Creator; das Vertrauen sinkt jedoch durch den Personalabbau nach der Uebernahme, Pricing-/Renewal-Reibung sowie Portabilitaets- und Support-Risiken.',
     reservations: [
       {
         id: 'vimeo-bending-spoons-acquisition-2025',
@@ -1005,12 +1890,238 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  expressvpn: {
+    trustScore: 4.8,
+    description:
+        'Non-US VPN provider (BVI legal controller with UK-linked private ownership) with recurring independent audits and mature security engineering, but trust is reduced by a high-impact DNS leak history, private-ownership governance opacity, and ongoing auto-renewal litigation risk.',
+    descriptionDe:
+        'Nicht-US-VPN-Anbieter (BVI-Controller mit UK-naher privater Eigentuemerstruktur) mit wiederkehrenden unabhaengigen Audits und reifer Security-Engineering-Basis; das Vertrauen sinkt jedoch durch eine hochrelevante DNS-Leak-Historie, Governance-Intransparenz unter privatem Ownership und laufende Auto-Renewal-Litigation-Risiken.',
+    reservations: [
+      {
+        id: 'expressvpn-private-ownership-delisting-2023',
+        text: 'Kape Technologies, the parent company of ExpressVPN, delisted in 2023 after the Unikmind cash offer, reducing public-market reporting transparency.',
+        textDe: 'Kape Technologies, die Muttergesellschaft von ExpressVPN, wurde 2023 nach dem Unikmind-Cash-Offer delistet; dadurch sinkt die Transparenz aus oeffentlicher Kapitalmarkt-Berichterstattung.',
+        severity: 'moderate',
+        date: '2023-02-15',
+        sourceUrl: 'https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/final-results-and-delisting/7423646',
+      },
+      {
+        id: 'expressvpn-bvi-controller-and-global-processing',
+        text: 'ExpressVPN states data control under Express Technologies Ltd. (BVI) and describes use of group entities and third-party processors, which increases jurisdiction and transfer-complexity for strict sovereignty requirements.',
+        textDe: 'ExpressVPN nennt Express Technologies Ltd. (BVI) als Daten-Controller und beschreibt den Einsatz von Gruppengesellschaften sowie Drittverarbeitern, was Jurisdiktions- und Transferkomplexitaet bei strikten Souveraenitaetsanforderungen erhoeht.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.expressvpn.com/privacy-policy',
+      },
+      {
+        id: 'expressvpn-cve-2024-25728-dns-leak',
+        text: 'CVE-2024-25728 documented that split tunneling on affected Windows versions could leak DNS requests outside the VPN resolver path.',
+        textDe: 'CVE-2024-25728 dokumentierte, dass Split Tunneling auf betroffenen Windows-Versionen DNS-Anfragen ausserhalb des VPN-Resolver-Pfads leaken konnte.',
+        severity: 'major',
+        sourceUrl: 'https://nvd.nist.gov/vuln/detail/CVE-2024-25728',
+      },
+      {
+        id: 'expressvpn-rdp-debug-code-leak-remediation',
+        text: 'ExpressVPN disclosed a Windows issue where temporary debug code could expose RDP traffic and published remediation guidance, indicating meaningful endpoint leak risk despite subsequent fixes.',
+        textDe: 'ExpressVPN legte ein Windows-Problem offen, bei dem temporaerer Debug-Code RDP-Traffic exponieren konnte, und veroeffentlichte Remediation-Hinweise; das zeigt ein relevantes Endpoint-Leak-Risiko trotz spaeterer Fixes.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.expressvpn.com/blog/fixes-for-dns-and-rdp-leaks/',
+      },
+      {
+        id: 'expressvpn-auto-renewal-class-action-2025',
+        text: 'A 2025 US class-action complaint alleges negative-option auto-renewal disclosure and cancellation-friction issues for ExpressVPN subscriptions (litigation pending).',
+        textDe: 'Eine US-Sammelklage aus 2025 wirft ExpressVPN negative-option Auto-Renewal-Offenlegung und Kuendigungsfriktion vor (Verfahren anhaengig).',
+        severity: 'major',
+        date: '2025-06-16',
+        sourceUrl: 'https://www.wolfpopper.com/wp-content/uploads/2025/06/Millar-v.-Express-Technologies-Ltd.-Class-Action-Complaint.pdf',
+      },
+      {
+        id: 'expressvpn-us-arbitration-terms-structure',
+        text: 'ExpressVPN Terms include arbitration/class-action-waiver language for US users, which can increase dispute-resolution friction for consumers.',
+        textDe: 'Die ExpressVPN-Bedingungen enthalten fuer US-Nutzer Arbitration- und Class-Action-Waiver-Klauseln, was die Streitbeilegung fuer Verbraucher erschweren kann.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.expressvpn.com/tos',
+      },
+      {
+        id: 'expressvpn-former-cio-doj-settlement-2021',
+        text: 'The US DOJ announced a deferred prosecution agreement tied to Project Raven involving ExpressVPN\'s former CIO, creating a durable governance-reputation overhang.',
+        textDe: 'Das US-Justizministerium veroeffentlichte ein Deferred-Prosecution-Abkommen im Project-Raven-Kontext unter Beteiligung des ehemaligen ExpressVPN-CIO; das erzeugt einen dauerhaften Governance-Reputationsfaktor.',
+        severity: 'moderate',
+        date: '2021-09-14',
+        sourceUrl: 'https://www.justice.gov/opa/pr/former-us-intelligence-community-and-us-military-personnel-charged-hacking-related-crimes',
+      },
+      {
+        id: 'expressvpn-no-logs-assurance-type-i-scope-limit',
+        text: 'ExpressVPN\'s KPMG assurance is ISAE (UK) 3000 Type I (point-in-time design/implementation), which is narrower than Type II operating-effectiveness coverage.',
+        textDe: 'Die KPMG-Assurance von ExpressVPN ist ISAE (UK) 3000 Type I (punktuelle Design-/Implementierungspruefung) und damit enger als eine Type-II-Deckung zur Wirksamkeit ueber einen Zeitraum.',
+        severity: 'moderate',
+        date: '2025-02-28',
+        sourceUrl: 'https://www.expressvpn.com/asset/report/ExpressVPN_assurance_report.pdf',
+      },
+      {
+        id: 'expressvpn-open-source-scope-partial',
+        text: 'ExpressVPN open-sources core Lightway protocol components, but the full commercial app and backend stack used by most customers remains proprietary.',
+        textDe: 'ExpressVPN stellt zentrale Lightway-Protokollkomponenten offen bereit, aber der komplette kommerzielle App- und Backend-Stack fuer die meisten Kunden bleibt proprietaer.',
+        severity: 'moderate',
+        sourceUrl: 'https://github.com/expressvpn/lightway',
+      },
+      {
+        id: 'expressvpn-usage-statistics-and-diagnostics-collection',
+        text: 'ExpressVPN\'s privacy policy documents collection of limited usage statistics (for example connection success by day, VPN location, and country/ISP) plus optional app diagnostic telemetry.',
+        textDe: 'Die ExpressVPN-Datenschutzerklaerung dokumentiert die Erhebung begrenzter Nutzungsstatistiken (z. B. erfolgreiche Verbindung pro Tag, VPN-Standort und Land/ISP) sowie optionaler App-Diagnosetelemetrie.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.expressvpn.com/privacy-policy',
+      },
+      {
+        id: 'expressvpn-third-party-telemetry-and-attribution-partners',
+        text: 'ExpressVPN discloses third-party telemetry/attribution partners (including Sentry, Firebase Crashlytics, and AppsFlyer), increasing third-party data-flow complexity.',
+        textDe: 'ExpressVPN nennt Drittpartner fuer Telemetrie/Attribution (unter anderem Sentry, Firebase Crashlytics und AppsFlyer), was die Komplexitaet externer Datenfluesse erhoeht.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.expressvpn.com/privacy-policy',
+      },
+      {
+        id: 'expressvpn-legacy-app-eol-2026',
+        text: 'ExpressVPN announced that legacy apps stop connecting after March 31, 2026 unless users migrate to newer versions, creating lifecycle and migration pressure for lagging environments.',
+        textDe: 'ExpressVPN kuendigte an, dass Legacy-Apps nach dem 31. Maerz 2026 nicht mehr verbinden, sofern Nutzer nicht auf neuere Versionen migrieren; das erzeugt Lifecycle- und Migrationsdruck fuer verzoegerte Umgebungen.',
+        severity: 'moderate',
+        date: '2026-03-31',
+        sourceUrl: 'https://www.expressvpn.com/blog/update-expressvpn-to-stay-connected/',
+      },
+      {
+        id: 'expressvpn-plan-tier-restructure-2025',
+        text: 'ExpressVPN replaced its prior single-plan model with Basic/Advanced/Pro tiers in September 2025, adding feature-tiering and higher packaging complexity.',
+        textDe: 'ExpressVPN ersetzte im September 2025 das fruehere Ein-Plan-Modell durch Basic/Advanced/Pro-Tarife und fuehrte damit Feature-Tiering sowie hoehere Paketkomplexitaet ein.',
+        severity: 'moderate',
+        date: '2025-09-02',
+        sourceUrl: 'https://www.expressvpn.com/blog/expressvpn-launches-tiers/',
+      },
+      {
+        id: 'expressvpn-workforce-reduction-report-2025',
+        text: 'Industry reporting in March 2025 described another workforce reduction at ExpressVPN, which can create transitional capacity risk for support and engineering execution.',
+        textDe: 'Branchenberichte aus dem Maerz 2025 beschrieben einen weiteren Personalabbau bei ExpressVPN, was uebergangsbedingte Kapazitaetsrisiken fuer Support und Engineering-Ausfuehrung erzeugen kann.',
+        severity: 'moderate',
+        date: '2025-03-19',
+        sourceUrl: 'https://www.techradar.com/vpn/vpn-services/expressvpn-reduces-workforce-for-the-second-time-in-two-years',
+      },
+    ],
+  },
+  mixpanel: {
+    trustScore: 3.1,
+    description:
+        'US-operated product analytics platform with strong compliance/security signals and practical export tooling, but trust is materially reduced by a confirmed 2025 data-export incident, US-sovereignty constraints, and billing/contract asymmetry.',
+    descriptionDe:
+        'US-Produktanalytik-Plattform mit starken Compliance-/Security-Signalen und praxistauglichen Exportwegen; das Vertrauen sinkt jedoch deutlich durch einen bestaetigten Datenexport-Vorfall 2025, US-Souveraenitaetsgrenzen sowie Billing-/Vertragsasymmetrien.',
+    reservations: [
+      {
+        id: 'mixpanel-security-incident-2025',
+        text: 'Mixpanel disclosed a November 2025 security incident where a social-engineering campaign led to unauthorized access and export of limited customer-identifiable analytics data.',
+        textDe: 'Mixpanel legte einen Sicherheitsvorfall aus November 2025 offen, bei dem eine Social-Engineering-Kampagne zu unautorisiertem Zugriff und Export begrenzt personenbezogener Analytics-Daten fuehrte.',
+        severity: 'major',
+        date: '2025-11-26',
+        sourceUrl: 'https://mixpanel.com/blog/mixpanel-security-update/',
+      },
+      {
+        id: 'mixpanel-third-party-customer-impact-openai-2025',
+        text: 'OpenAI reported that the Mixpanel incident exposed profile and analytics metadata for some API users, reinforcing third-party dependency and targeted-phishing risk.',
+        textDe: 'OpenAI meldete, dass der Mixpanel-Vorfall Profil- und Analytics-Metadaten einiger API-Nutzer exponierte; das verstaerkt Drittanbieter-Abhaengigkeits- und zielgerichtete-Phishing-Risiken.',
+        severity: 'major',
+        date: '2025-11-26',
+        sourceUrl: 'https://status.openai.com/incidents/01K91M8C5DBNFRFC8R55D7Q1EW',
+      },
+      {
+        id: 'mixpanel-us-default-hosting-residency-friction',
+        text: 'Mixpanel documents that projects are US-hosted by default and EU residency requires dedicated project configuration, creating deployment-governance friction for strict sovereignty requirements.',
+        textDe: 'Mixpanel dokumentiert US-Hosting als Standard; EU-Residency erfordert eine gesonderte Projektkonfiguration, was bei strikten Souveraenitaetsvorgaben Governance-Reibung erzeugt.',
+        severity: 'major',
+        sourceUrl: 'https://docs.mixpanel.com/docs/privacy/data-residency',
+      },
+      {
+        id: 'mixpanel-subprocessor-cross-border-processing',
+        text: 'Mixpanel publishes subprocessors and processing locations, including non-EU providers, so even EU-residency setups still require careful transfer/governance review by use case.',
+        textDe: 'Mixpanel veroeffentlicht Subprozessoren und Verarbeitungsorte einschliesslich Nicht-EU-Anbietern; selbst bei EU-Residency ist daher je Use Case eine sorgfaeltige Transfer-/Governance-Pruefung noetig.',
+        severity: 'moderate',
+        sourceUrl: 'https://mixpanel.com/legal/subprocessors/',
+      },
+      {
+        id: 'mixpanel-aggregated-data-and-liability-asymmetry',
+        text: 'Terms grant Mixpanel rights over aggregated/de-identified data and include liability limitations, creating contractual asymmetry for risk allocation.',
+        textDe: 'Die Bedingungen gewaehren Mixpanel Rechte an aggregierten/de-identifizierten Daten und enthalten Haftungsbegrenzungen, was eine vertragliche Asymmetrie bei der Risikoallokation erzeugt.',
+        severity: 'moderate',
+        sourceUrl: 'https://mixpanel.com/legal/terms-of-use/',
+      },
+      {
+        id: 'mixpanel-auto-renewal-and-refund-friction',
+        text: 'Mixpanel terms state subscriptions auto-renew by default and fees are generally non-refundable unless required by law.',
+        textDe: 'Die Mixpanel-Bedingungen nennen standardmaessige Auto-Renewals; Gebuehren sind grundsaetzlich nicht rueckerstattbar, sofern nicht gesetzlich erforderlich.',
+        severity: 'moderate',
+        sourceUrl: 'https://mixpanel.com/legal/terms-of-use/',
+      },
+      {
+        id: 'mixpanel-no-hard-billing-limit-overages',
+        text: 'Mixpanel billing docs state there is no hard billing limit by default; overages are billed unless additional event rates are explicitly disabled in billing settings.',
+        textDe: 'Die Billing-Dokumentation von Mixpanel nennt standardmaessig kein hartes Billing-Limit; Overages werden abgerechnet, sofern zusaetzliche Event-Raten nicht explizit in den Billing-Einstellungen deaktiviert werden.',
+        severity: 'moderate',
+        sourceUrl: 'https://docs.mixpanel.com/docs/billing/what-if-i-go-over-my-prepaid-amount',
+      },
+      {
+        id: 'mixpanel-gen-ai-third-party-processing-surface',
+        text: 'Mixpanel\'s Gen-AI legal terms describe third-party model-provider processing for AI features, adding an optional external data-processing surface when those features are enabled.',
+        textDe: 'Die Gen-AI-Bedingungen von Mixpanel beschreiben die Verarbeitung ueber Drittanbieter-Modellprovider; bei aktivierten AI-Funktionen entsteht damit eine optionale externe Datenverarbeitungsflaeche.',
+        severity: 'moderate',
+        sourceUrl: 'https://mixpanel.com/legal/gen-ai-features/',
+      },
+      {
+        id: 'mixpanel-class-action-following-incident-2025',
+        text: 'A US class-action complaint filed in December 2025 over the third-party breach named OpenAI and Mixpanel, indicating ongoing litigation exposure from the incident.',
+        textDe: 'Eine im Dezember 2025 eingereichte US-Sammelklage zum Drittanbieter-Breach nennt OpenAI und Mixpanel und signalisiert anhaltende Litigation-Exposition aus dem Vorfall.',
+        severity: 'moderate',
+        date: '2025-12-01',
+        sourceUrl: 'https://dockets.justia.com/docket/california/candce/5:2025cv10717/448958',
+      },
+      {
+        id: 'mixpanel-recurring-operational-incidents-2025-2026',
+        text: 'Mixpanel\'s public incident feed shows repeated 2025-2026 disruptions across API/querying, authentication, and data pipeline surfaces, indicating non-trivial operational interruption risk.',
+        textDe: 'Der oeffentliche Incident-Feed von Mixpanel zeigt wiederholte Stoerungen 2025-2026 ueber API-/Query-, Authentifizierungs- und Datenpipeline-Flaechen; das signalisiert ein nicht-triviales Unterbrechungsrisiko.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.mixpanelstatus.com/history.atom',
+      },
+      {
+        id: 'mixpanel-eu-residency-ingestion-delay-2025',
+        text: 'Mixpanel reported a temporary data-ingestion delay in October 2025 that affected projects enrolled in EU Residency, including forwarding from US to EU.',
+        textDe: 'Mixpanel meldete im Oktober 2025 eine temporaere Data-Ingestion-Verzoegerung fuer Projekte im EU-Residency-Programm, einschliesslich Weiterleitungen von US nach EU.',
+        severity: 'moderate',
+        date: '2025-10-27',
+        sourceUrl: 'https://www.mixpanelstatus.com/incidents/lyc8jnwdmqv4',
+      },
+      {
+        id: 'mixpanel-sso-broker-dependency-outage-2025',
+        text: 'A December 2025 incident linked SSO login failures to outage conditions at Mixpanel\'s authentication broker (Okta), underscoring third-party identity dependency risk.',
+        textDe: 'Ein Incident im Dezember 2025 verknuepfte SSO-Login-Ausfaelle mit Stoerungen beim Authentifizierungs-Broker (Okta) von Mixpanel und unterstreicht Drittanbieter-Abhaengigkeitsrisiken bei Identity.',
+        severity: 'moderate',
+        date: '2025-12-03',
+        sourceUrl: 'https://www.mixpanelstatus.com/incidents/ly3310s754yz',
+      },
+      {
+        id: 'mixpanel-docs-maintainer-concentration-signal',
+        text: 'The public docs repository names only a small maintainer set, which can increase documentation-response dependency on a few individuals.',
+        textDe: 'Das oeffentliche Docs-Repository nennt nur ein kleines Maintainer-Set; dadurch kann die Dokumentations-Response staerker von wenigen Personen abhaengen.',
+        severity: 'minor',
+        sourceUrl: 'https://raw.githubusercontent.com/mixpanel/docs/main/README.md',
+      },
+      {
+        id: 'mixpanel-review-signals-support-pricing-friction',
+        text: 'Public review-platform summaries include recurring negatives around support and pricing complexity, adding procurement-trust friction as a community signal.',
+        textDe: 'Oeffentliche Review-Plattform-Zusammenfassungen enthalten wiederkehrende Negativsignale zu Support und Pricing-Komplexitaet; das erzeugt als Community-Signal zusaetzliche Procurement-Trust-Reibung.',
+        severity: 'minor',
+        sourceUrl: 'https://www.trustradius.com/products/mixpanel/reviews',
+      },
+    ],
+  },
   '1password': {
     trustScore: 4.8,
     description:
-      'North America-operated password manager with unusually strong independent security testing and transparent advisory practices, but trust is reduced by local-malware attack surface, third-party dependency incidents, and limited public access to full compliance artifacts.',
+        'North America-operated password manager with unusually strong independent security testing and transparent advisory practices, but trust is reduced by local-malware attack surface, third-party dependency incidents, and limited public access to full compliance artifacts.',
     descriptionDe:
-      'Nordamerikanischer Passwortmanager mit ungewoehnlich starker unabhaengiger Security-Pruefung und transparenter Advisory-Praxis; das Vertrauen sinkt jedoch durch lokale Malware-Angriffsflaechen, Drittanbieter-Abhaengigkeiten und nur eingeschraenkt oeffentlich verfuegbare Compliance-Artefakte.',
+        'Nordamerikanischer Passwortmanager mit ungewoehnlich starker unabhaengiger Security-Pruefung und transparenter Advisory-Praxis; das Vertrauen sinkt jedoch durch lokale Malware-Angriffsflaechen, Drittanbieter-Abhaengigkeiten und nur eingeschraenkt oeffentlich verfuegbare Compliance-Artefakte.',
     reservations: [
       {
         id: '1password-local-exfiltration-cve-2024-42218',
@@ -1064,12 +2175,284 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  meta: {
+    trustScore: 1.6,
+    description:
+        'US-operated social platform with large-scale security operations and active vulnerability-reporting channels, but trust is materially reduced by repeated EU privacy enforcement, ad-surveillance monetization incentives, AI-training governance conflicts, and community lock-in risk in Facebook Groups.',
+    descriptionDe:
+        'US-Social-Plattform mit grossskaligen Security-Operations und aktiven Kanaelen fuer Schwachstellenmeldungen; das Vertrauen sinkt jedoch deutlich durch wiederholte EU-Privacy-Durchsetzung, werbegetriebene Ueberwachungsanreize, Konflikte bei KI-Training und Community-Lock-in-Risiken bei Facebook Groups.',
+    reservations: [
+      {
+        id: 'meta-ad-tech-majority-revenue-model',
+        text: 'Meta reports that substantially all revenue is generated from advertising, creating structural incentives that can conflict with strict privacy-first expectations for social and community products.',
+        textDe: 'Meta berichtet, dass der Umsatz im Wesentlichen aus Werbung stammt; dadurch entstehen strukturelle Anreize, die mit strikten Privacy-First-Erwartungen an Social- und Community-Produkte kollidieren koennen.',
+        severity: 'major',
+        sourceUrl: 'https://www.sec.gov/ix?doc=/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm',
+      },
+      {
+        id: 'meta-gdpr-eu-us-transfer-fine-2023',
+        text: 'In May 2023, Ireland\'s DPC fined Meta EUR 1.2B and ordered remediation over Facebook data transfers from the EEA to the United States.',
+        textDe: 'Im Mai 2023 verhaengte die irische DPC gegen Meta eine Strafe von 1,2 Mrd. EUR und ordnete Abhilfemassnahmen wegen Facebook-Datentransfers aus dem EWR in die USA an.',
+        severity: 'major',
+        date: '2023-05-22',
+        sourceUrl: 'https://www.dataprotection.ie/en/news-media/press-releases/Data-Protection-Commission-announces-conclusion-of-inquiry-into-Meta-Ireland',
+      },
+      {
+        id: 'meta-facebook-scraping-fine-2022',
+        text: 'In November 2022, Ireland\'s DPC fined Meta EUR 265M in the Facebook data-scraping inquiry and required corrective actions under GDPR Article 25.',
+        textDe: 'Im November 2022 verhaengte die irische DPC im Facebook-Data-Scraping-Verfahren eine Strafe von 265 Mio. EUR gegen Meta und verlangte Korrekturmassnahmen nach DSGVO Art. 25.',
+        severity: 'major',
+        date: '2022-11-28',
+        sourceUrl: 'https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-in-facebook-data-scraping-inquiry',
+      },
+      {
+        id: 'meta-view-as-breach-fine-2024',
+        text: 'In December 2024, Ireland\'s DPC fined Meta EUR 251M for security failures linked to the 2018 "View As" breach affecting Facebook user data.',
+        textDe: 'Im Dezember 2024 verhaengte die irische DPC gegen Meta eine Strafe von 251 Mio. EUR wegen Security-Defiziten im Zusammenhang mit dem 2018er "View As"-Breach bei Facebook-Nutzerdaten.',
+        severity: 'major',
+        date: '2024-12-17',
+        sourceUrl: 'https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-meta-eu251-million',
+      },
+      {
+        id: 'meta-dma-pay-or-consent-preliminary-findings-2024',
+        text: 'In July 2024, the European Commission sent preliminary findings that Meta\'s "pay or consent" model may breach DMA obligations for gatekeepers.',
+        textDe: 'Im Juli 2024 versandte die Europaeische Kommission vorlaeufige Feststellungen, dass Metas "Pay or Consent"-Modell gegen DMA-Pflichten fuer Gatekeeper verstossen koennte.',
+        severity: 'major',
+        date: '2024-07-01',
+        sourceUrl: 'https://digital-strategy.ec.europa.eu/en/news/commission-sends-preliminary-findings-meta-over-its-pay-or-consent-model-breach-digital-markets-act',
+      },
+      {
+        id: 'meta-dma-non-compliance-fine-2025',
+        text: 'In April 2025, the European Commission found Meta in breach of the Digital Markets Act and announced a financial penalty.',
+        textDe: 'Im April 2025 stellte die Europaeische Kommission einen DMA-Verstoss durch Meta fest und verhaengte eine Geldbusse.',
+        severity: 'major',
+        date: '2025-04-23',
+        sourceUrl: 'https://digital-strategy.ec.europa.eu/en/news/commission-finds-apple-and-meta-breach-digital-markets-act',
+      },
+      {
+        id: 'meta-ai-training-public-content-opt-out',
+        text: 'Meta announced training AI models in Europe using public adult content and AI interactions with an objection form, reflecting an opt-out rather than opt-in baseline.',
+        textDe: 'Meta kuendigte fuer Europa das KI-Training mit oeffentlichen Inhalten Erwachsener und KI-Interaktionen inklusive Widerspruchsformular an; das entspricht einem Opt-out- statt Opt-in-Baseline-Modell.',
+        severity: 'major',
+        date: '2025-04-14',
+        sourceUrl: 'https://about.fb.com/news/2025/04/making-ai-work-harder-for-europeans/',
+      },
+      {
+        id: 'meta-anpd-ai-training-suspension-2024',
+        text: 'In July 2024, Brazil\'s ANPD ordered a precautionary suspension of Meta\'s personal-data processing for generative-AI training.',
+        textDe: 'Im Juli 2024 ordnete Brasiliens ANPD vorsorglich die Aussetzung der Verarbeitung personenbezogener Daten durch Meta fuer Generative-AI-Training an.',
+        severity: 'major',
+        date: '2024-07-02',
+        sourceUrl: 'https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-determina-suspensao-cautelar-do-tratamento-de-dados-pessoais-para-treinamento-da-ia-da-meta',
+      },
+      {
+        id: 'meta-dual-class-controlled-company-governance',
+        text: 'Meta\'s SEC risk disclosures describe concentrated voting control and controlled-company governance structure, limiting external checks and balances.',
+        textDe: 'Metas SEC-Risikohinweise beschreiben konzentrierte Stimmrechtskontrolle und eine Controlled-Company-Governance-Struktur, was externe Checks and Balances einschraenkt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.sec.gov/ix?doc=/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm',
+      },
+      {
+        id: 'meta-groups-data-export-limited-migration',
+        text: 'Facebook provides account data export tooling, but that does not provide a full migration path for group-community context, keeping lock-in risk high.',
+        textDe: 'Facebook bietet Exportfunktionen fuer Account-Daten, liefert damit jedoch keinen vollstaendigen Migrationspfad fuer Gruppen-Community-Kontext; das Lock-in-Risiko bleibt hoch.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.facebook.com/help/212802592074644',
+      },
+      {
+        id: 'meta-groups-community-chats-shutdown-2025',
+        text: 'Facebook Help states that Community Chats in Groups were removed, showing feature-volatility risk for communities dependent on platform-native workflows.',
+        textDe: 'Die Facebook-Hilfe nennt, dass Community Chats in Gruppen entfernt wurden; das zeigt Feature-Volatilitaetsrisiken fuer Communities, die von plattformeigenen Workflows abhaengen.',
+        severity: 'moderate',
+        date: '2025-10-05',
+        sourceUrl: 'https://www.facebook.com/help/102988787046086',
+      },
+      {
+        id: 'meta-network-effect-lock-in-community-signal',
+        text: 'Community discussions repeatedly report that local groups remain heavily dependent on Facebook, highlighting network-effect lock-in risk.',
+        textDe: 'Community-Diskussionen berichten wiederholt, dass lokale Gruppen weiterhin stark von Facebook abhaengen; das unterstreicht Lock-in-Risiken durch Netzwerkeffekte.',
+        severity: 'minor',
+        sourceUrl: 'https://news.ycombinator.com/item?id=34618706',
+      },
+      {
+        id: 'meta-terms-broad-content-license-and-ad-use',
+        text: 'Facebook Terms grant Meta a broad, transferable, sublicensable, worldwide license over user content and allow use of user identity context in connection with ads.',
+        textDe: 'Die Facebook-Nutzungsbedingungen gewaehrleisten Meta eine breite, uebertragbare, unterlizenzierbare, weltweite Lizenz an Nutzerinhalten und erlauben die Nutzung von Nutzeridentitaetskontext im Zusammenhang mit Werbung.',
+        severity: 'major',
+        sourceUrl: 'https://www.facebook.com/legal/terms',
+      },
+      {
+        id: 'meta-osi-llama-open-washing-2025',
+        text: 'In February 2025, the Open Source Initiative stated that Meta\'s Llama license is still not open source, signaling licensing-transparency friction in Meta\'s open narrative.',
+        textDe: 'Im Februar 2025 stellte die Open Source Initiative fest, dass Metas Llama-Lizenz weiterhin nicht Open Source ist; das signalisiert Reibung bei Lizenztransparenz in Metas Open-Narrativ.',
+        severity: 'moderate',
+        date: '2025-02-18',
+        sourceUrl: 'https://opensource.org/blog/metas-llama-license-is-still-not-open-source',
+      },
+      {
+        id: 'meta-scam-investment-ad-enforcement-pressure-2025',
+        text: 'In June 2025, California\'s Attorney General urged immediate Meta action against investment scam ads, reinforcing platform fraud-enforcement concerns.',
+        textDe: 'Im Juni 2025 forderte der kalifornische Attorney General sofortige Massnahmen von Meta gegen Investment-Scam-Werbung und verstaerkte damit Bedenken zur Fraud-Durchsetzung auf der Plattform.',
+        severity: 'moderate',
+        date: '2025-06-11',
+        sourceUrl: 'https://oag.ca.gov/news/press-releases/attorney-general-bonta-urges-immediate-action-meta-prevent-investment-scam',
+      },
+      {
+        id: 'meta-platform-outage-march-2024',
+        text: 'AP reported a widespread Meta platform outage in March 2024 affecting Facebook, Instagram, Threads, and Messenger logins.',
+        textDe: 'AP berichtete im Maerz 2024 ueber einen weitreichenden Ausfall von Meta-Plattformen mit Beeintraechtigungen bei Logins von Facebook, Instagram, Threads und Messenger.',
+        severity: 'moderate',
+        date: '2024-03-05',
+        sourceUrl: 'https://apnews.com/article/974886228759761c2c3c28f2e984a2d6',
+      },
+      {
+        id: 'meta-platform-outage-december-2024',
+        text: 'TechCrunch reported another global Meta apps outage in December 2024, indicating recurring reliability risk for community-dependent workflows.',
+        textDe: 'TechCrunch berichtete im Dezember 2024 ueber einen weiteren globalen Ausfall von Meta-Apps und signalisiert wiederkehrende Zuverlaessigkeitsrisiken fuer community-abhaengige Workflows.',
+        severity: 'moderate',
+        date: '2024-12-11',
+        sourceUrl: 'https://techcrunch.com/2024/12/11/meta-apps-experience-global-outage/',
+      },
+      {
+        id: 'meta-child-safety-trial-risk-2026',
+        text: 'AP reported in February 2026 that Meta was on trial in New Mexico over allegations that its platforms enable child sexual exploitation; Meta denied the allegations.',
+        textDe: 'AP berichtete im Februar 2026, dass Meta in New Mexico wegen Vorwuerfen vor Gericht stand, seine Plattformen ermoeglichten sexuelle Ausbeutung von Kindern; Meta wies die Vorwuerfe zurueck.',
+        severity: 'moderate',
+        date: '2026-02-09',
+        sourceUrl: 'https://apnews.com/article/19195fc680dba782fb971d68082e11a4',
+      },
+      {
+        id: 'meta-create-react-app-maintenance-friction-signal',
+        text: 'The public create-react-app issue queue continues to show a visible needs-triage backlog, a minor but persistent maintenance-transparency signal in Meta\'s OSS interface.',
+        textDe: 'Die oeffentliche Issue-Queue von create-react-app zeigt weiterhin einen sichtbaren Needs-Triage-Backlog, ein kleines aber bestaendiges Signal fuer Maintenance-Transparenz-Reibung an Metas OSS-Schnittstelle.',
+        severity: 'minor',
+        sourceUrl: 'https://github.com/facebook/create-react-app/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22needs%20triage%22',
+      },
+    ],
+  },
+  dashlane: {
+    trustScore: 3.8,
+    description:
+        'US-operated password manager with meaningful security engineering and export pathways, but trust is reduced by a confirmed 2025 CRM breach, broad US subprocessor exposure, source-available licensing limits, and contract-accountability friction.',
+    descriptionDe:
+        'US-Passwortmanager mit solider Security-Engineering-Basis und dokumentierten Exportpfaden; das Vertrauen sinkt jedoch durch einen bestaetigten CRM-Breach 2025, breite US-Subprocessor-Abhaengigkeiten, source-available Lizenzgrenzen und vertragliche Accountability-Reibung.',
+    reservations: [
+      {
+        id: 'dashlane-crm-incident-salesforce-drift-2025',
+        text: 'Dashlane disclosed an August 2025 incident where a threat actor accessed a third-party Salesforce CRM integration (Drift), exposing a small subset of business-customer contact data.',
+        textDe: 'Dashlane legte einen Vorfall vom August 2025 offen, bei dem ein Angreifer ueber eine Drittanbieter-Salesforce-CRM-Integration (Drift) auf einen kleinen Teil von Business-Kundenkontaktdaten zugriff.',
+        severity: 'major',
+        date: '2025-08-27',
+        sourceUrl: 'https://support.dashlane.com/hc/en-us/articles/29059120844306-Security-advisory-Incident-impacting-business-customer-data-in-third-party-CRM-system',
+      },
+      {
+        id: 'dashlane-salesloft-drift-supply-chain-campaign-2025',
+        text: 'Google threat-intelligence reporting tied the same Salesloft Drift OAuth compromise to a wider multi-organization campaign, reinforcing third-party integration and supply-chain risk.',
+        textDe: 'Das Threat-Intelligence-Reporting von Google ordnete denselben Salesloft-Drift-OAuth-Kompromittierungsweg einer breiteren Multi-Organisationen-Kampagne zu und verstaerkt damit Integrations- und Supply-Chain-Risiken.',
+        severity: 'major',
+        date: '2025-08-26',
+        sourceUrl: 'https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift',
+      },
+      {
+        id: 'dashlane-us-heavy-subprocessor-footprint',
+        text: 'Dashlane\'s subprocessor list includes many US-based vendors across CRM, support, analytics, and billing functions, increasing transfer and dependency exposure for strict sovereignty requirements.',
+        textDe: 'Die Dashlane-Subprocessor-Liste enthaelt viele US-basierte Anbieter fuer CRM, Support, Analytics und Billing, was Transfer- und Abhaengigkeitsrisiken bei strengen Souveraenitaetsanforderungen erhoeht.',
+        severity: 'major',
+        sourceUrl: 'https://www.dashlane.com/privacy/subprocessors',
+      },
+      {
+        id: 'dashlane-website-ad-interaction-data-collection',
+        text: 'Dashlane\'s privacy policy says it collects website-interaction and ad-attribution data, including visited pages and which ads were seen before visiting Dashlane.',
+        textDe: 'Die Dashlane-Datenschutzerklaerung nennt die Erhebung von Website-Interaktions- und Ad-Attributionsdaten, einschliesslich besuchter Seiten und zuvor gesehener Anzeigen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/privacy',
+      },
+      {
+        id: 'dashlane-ip-retention-b2b-up-to-one-year',
+        text: 'Dashlane states it retains access-IP activity for up to 45 days for consumer users and up to one year for B2B users.',
+        textDe: 'Dashlane gibt an, Access-IP-Aktivitaeten fuer Consumer-Nutzer bis zu 45 Tage und fuer B2B-Nutzer bis zu ein Jahr zu speichern.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/privacy',
+      },
+      {
+        id: 'dashlane-mobile-code-by-nc-license-limits',
+        text: 'Dashlane published iOS and Android source code under Creative Commons BY-NC 4.0 and stated it was not yet accepting external contributions, limiting open-source governance and commercial forkability.',
+        textDe: 'Dashlane veroeffentlichte iOS- und Android-Quellcode unter Creative Commons BY-NC 4.0 und gab an, noch keine externen Beitraege anzunehmen, was Open-Source-Governance und kommerzielle Forkbarkeit einschraenkt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/blog/mobile-code-now-publicly-available',
+      },
+      {
+        id: 'dashlane-arbitration-and-class-action-waiver',
+        text: 'Dashlane terms require arbitration for many disputes and include class-action waiver language where legally allowed, reducing default court-based accountability paths.',
+        textDe: 'Die Dashlane-Bedingungen verlangen fuer viele Streitfaelle Arbitration und enthalten, soweit rechtlich zulaessig, Class-Action-Waiver-Klauseln, was standardmaessige gerichtliche Accountability-Pfade reduziert.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/terms',
+      },
+      {
+        id: 'dashlane-auto-renewal-and-refund-friction',
+        text: 'Subscriptions auto-renew by default and terms state no pro-rata refund on cancellation of the current term, adding practical contract-exit friction.',
+        textDe: 'Abonnements verlaengern sich standardmaessig automatisch und die Bedingungen nennen bei Kuendigung der laufenden Laufzeit keine pro-rata Rueckerstattung, was praktische Vertragsausstiegs-Reibung erzeugt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/terms',
+      },
+      {
+        id: 'dashlane-free-plan-discontinued-2025',
+        text: 'Dashlane announced the free-plan end on September 16, 2025, with post-trial access limited to export actions, increasing pricing-volatility and migration-pressure risk.',
+        textDe: 'Dashlane kuendigte das Ende des Free-Plans zum 16. September 2025 an; nach Ablauf ist der Zugriff auf Exportfunktionen begrenzt, was Preisvolatilitaets- und Migrationsdruck-Risiken erhoeht.',
+        severity: 'moderate',
+        date: '2025-08-05',
+        sourceUrl: 'https://www.dashlane.com/blog/dashlane-free-ending',
+      },
+      {
+        id: 'dashlane-support-and-billing-friction-signals',
+        text: 'Public review patterns include recurring complaints about support response times and billing handling, indicating customer-trust friction beyond core cryptography claims.',
+        textDe: 'Oeffentliche Review-Muster enthalten wiederkehrende Beschwerden zu Support-Reaktionszeiten und Billing-Handling, was ueber reine Kryptografie-Claims hinaus Customer-Trust-Reibung zeigt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.trustpilot.com/review/dashlane.com',
+      },
+      {
+        id: 'dashlane-hashed-identifiers-for-ad-targeting',
+        text: 'Dashlane\'s privacy policy says hashed emails and/or device IDs are shared with service providers to optimize advertising efforts, indicating marketing-linked identifier sharing.',
+        textDe: 'Die Dashlane-Datenschutzerklaerung nennt die Weitergabe gehashter E-Mails und/oder Device-IDs an Dienstleister zur Optimierung von Werbemassnahmen und zeigt damit marketingbezogenes Identifier-Sharing.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/privacy',
+      },
+      {
+        id: 'dashlane-b2b-admin-visibility-of-user-activity-signals',
+        text: 'Dashlane states B2B admins can access certain individual usage signals such as stored business-space sites/services and compromised-credential status.',
+        textDe: 'Dashlane gibt an, dass B2B-Admins auf bestimmte individuelle Nutzungssignale zugreifen koennen, etwa gespeicherte Sites/Services im Business-Space und den Status kompromittierter Zugangsdaten.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/privacy',
+      },
+      {
+        id: 'dashlane-aggregated-usage-data-owned-by-vendor',
+        text: 'Dashlane\'s privacy policy says aggregated usage data is owned by Dashlane, which can conflict with stricter data-minimization expectations.',
+        textDe: 'Die Dashlane-Datenschutzerklaerung nennt aggregierte Nutzungsdaten als Eigentum von Dashlane, was mit strengeren Data-Minimization-Erwartungen kollidieren kann.',
+        severity: 'minor',
+        sourceUrl: 'https://www.dashlane.com/privacy',
+      },
+      {
+        id: 'dashlane-cloudfront-global-delivery-path',
+        text: 'Dashlane\'s subprocessor list says Amazon CloudFront delivers secured data globally based on user location, adding cross-border delivery-path complexity for strict residency programs.',
+        textDe: 'Die Dashlane-Subprocessor-Liste nennt Amazon CloudFront fuer die globale Auslieferung gesicherter Daten je nach Nutzerstandort, was die grenzueberschreitende Delivery-Pfad-Komplexitaet bei strengen Residency-Programmen erhoeht.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dashlane.com/privacy/subprocessors',
+      },
+      {
+        id: 'dashlane-android-legacy-code-migration-signal',
+        text: 'Dashlane\'s public Android repository documents legacy Java components and an ongoing MVP-to-MVVM migration, indicating long-lived client-code technical debt.',
+        textDe: 'Das oeffentliche Android-Repository von Dashlane dokumentiert Legacy-Java-Komponenten und eine laufende MVP-zu-MVVM-Migration, was auf langlebige Technical-Debt im Client-Code hinweist.',
+        severity: 'minor',
+        sourceUrl: 'https://github.com/Dashlane/android-apps',
+      },
+    ],
+  },
   whatsapp: {
     trustScore: 3.4,
     description:
-      'US-operated messenger with strong default end-to-end encryption for message content, but trust is reduced by Meta\'s ad-driven ownership model, metadata exposure risks, and repeated regulatory pressure on data-sharing transparency.',
+        'US-operated messenger with strong default end-to-end encryption for message content, but trust is reduced by Meta\'s ad-driven ownership model, metadata exposure risks, and repeated regulatory pressure on data-sharing transparency.',
     descriptionDe:
-      'US-Messenger mit starker standardmaessiger Ende-zu-Ende-Verschluesselung fuer Nachrichteninhalte; das Vertrauen sinkt jedoch durch Metas werbegetriebenes Eigentuermodell, Metadatenrisiken und wiederkehrenden regulatorischen Druck bei Data-Sharing-Transparenz.',
+        'US-Messenger mit starker standardmaessiger Ende-zu-Ende-Verschluesselung fuer Nachrichteninhalte; das Vertrauen sinkt jedoch durch Metas werbegetriebenes Eigentuermodell, Metadatenrisiken und wiederkehrenden regulatorischen Druck bei Data-Sharing-Transparenz.',
     reservations: [
       {
         id: 'whatsapp-meta-ad-tech-majority-control',
@@ -1144,9 +2527,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   yahoo: {
     trustScore: 2.1,
     description:
-      'US-operated email service with broad feature coverage, but trust is materially reduced by inbox-content analysis for advertising, AI-provider data-sharing consent language, and legacy mega-breach disclosure failures.',
+        'US-operated email service with broad feature coverage, but trust is materially reduced by inbox-content analysis for advertising, AI-provider data-sharing consent language, and legacy mega-breach disclosure failures.',
     descriptionDe:
-      'US-E-Mail-Dienst mit breitem Funktionsumfang, dessen Vertrauen jedoch durch dokumentierte Inhaltsanalyse des Postfachs fuer Werbung, Einwilligungsklauseln zur Datenweitergabe an KI-Anbieter und historische Mega-Breach-Disclosure-Defizite deutlich sinkt.',
+        'US-E-Mail-Dienst mit breitem Funktionsumfang, dessen Vertrauen jedoch durch dokumentierte Inhaltsanalyse des Postfachs fuer Werbung, Einwilligungsklauseln zur Datenweitergabe an KI-Anbieter und historische Mega-Breach-Disclosure-Defizite deutlich sinkt.',
     reservations: [
       {
         id: 'yahoo-mail-content-analysis-for-advertising',
@@ -1262,12 +2645,146 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  dropbox: {
+    trustScore: 3.6,
+    description:
+        'US-operated cloud storage platform with strong security certifications and transparent incident handling, but trust is reduced by the 2024 Dropbox Sign breach, concentrated founder voting control, US-jurisdiction transfer exposure, and recurring contract/cancellation frictions.',
+    descriptionDe:
+        'US-Cloudspeicher-Plattform mit starken Sicherheitszertifizierungen und transparenter Incident-Kommunikation, deren Vertrauen jedoch durch den Dropbox-Sign-Breach von 2024, konzentrierte Gruender-Stimmrechtskontrolle, US-Jurisdiktions- und Transferexposition sowie wiederkehrende Vertrags-/Kuendigungsfriktionen sinkt.',
+    reservations: [
+      {
+        id: 'dropbox-sign-production-incident-2024',
+        text: 'Dropbox disclosed unauthorized access to Dropbox Sign production systems in April 2024, with exposure including account emails/usernames for all users and additional authentication data for subsets of users.',
+        textDe: 'Dropbox legte im April 2024 einen unautorisierten Zugriff auf Produktionssysteme von Dropbox Sign offen; betroffen waren unter anderem Konto-E-Mails/Benutzernamen fuer alle Nutzer sowie zusaetzliche Authentifizierungsdaten fuer Teilmengen.',
+        severity: 'major',
+        date: '2024-04-24',
+        sourceUrl: 'https://www.sec.gov/ixviewer/ix.html?doc=/Archives/edgar/data/1467623/000146762324000024/dbx-20240429.htm',
+      },
+      {
+        id: 'dropbox-sign-incident-api-token-exposure-2024',
+        text: 'Dropbox stated that the Dropbox Sign incident also involved API keys, OAuth tokens, and certain multi-factor authentication information for some integrations/accounts.',
+        textDe: 'Dropbox gab an, dass der Dropbox-Sign-Vorfall fuer einige Integrationen/Konten auch API-Keys, OAuth-Tokens und bestimmte Multi-Faktor-Authentifizierungsinformationen betraf.',
+        severity: 'major',
+        date: '2024-04-24',
+        sourceUrl: 'https://blog.dropbox.com/topics/company/a-recent-security-incident-involving-dropbox-sign',
+      },
+      {
+        id: 'dropbox-phishing-github-incident-2022',
+        text: 'Dropbox reported a 2022 phishing-driven GitHub compromise where an attacker copied 130 repositories and accessed some credentials/API keys plus contact records.',
+        textDe: 'Dropbox meldete 2022 einen phishinggetriebenen GitHub-Kompromiss, bei dem ein Angreifer 130 Repositories kopierte und auf einige Credentials/API-Keys sowie Kontaktdatensaetze zugriff.',
+        severity: 'moderate',
+        date: '2022-11-01',
+        sourceUrl: 'https://dropbox.tech/security/a-recent-phishing-campaign-targeting-dropbox',
+      },
+      {
+        id: 'dropbox-zdi-cve-2024-5924-scope-dispute',
+        text: 'ZDI documented CVE-2024-5924 (Dropbox Desktop, CVSS 8.8) and noted Dropbox initially treated the report as out of bounty scope before public advisory publication.',
+        textDe: 'ZDI dokumentierte CVE-2024-5924 (Dropbox Desktop, CVSS 8.8) und hielt fest, dass Dropbox den Report zunaechst als ausserhalb des Bounty-Scopes einordnete, bevor ein oeffentlicher Advisory erschien.',
+        severity: 'moderate',
+        date: '2024-06-20',
+        sourceUrl: 'https://www.zerodayinitiative.com/advisories/ZDI-24-677/',
+      },
+      {
+        id: 'dropbox-global-processing-and-us-transfer-exposure',
+        text: 'Dropbox privacy terms state that personal data can be stored, transferred, and processed in the United States and other countries, which keeps cross-border jurisdiction exposure in scope.',
+        textDe: 'Die Dropbox-Datenschutzhinweise nennen, dass personenbezogene Daten in den USA und anderen Laendern gespeichert, uebertragen und verarbeitet werden koennen; dadurch bleibt grenzueberschreitende Jurisdiktions-Exposition bestehen.',
+        severity: 'major',
+        sourceUrl: 'https://www.dropbox.com/privacy',
+      },
+      {
+        id: 'dropbox-sign-data-residency-default-us',
+        text: 'Dropbox Sign documents that data residency defaults to U.S. storage unless eligible premium plans choose another region.',
+        textDe: 'Dropbox Sign dokumentiert, dass Data Residency standardmaessig auf US-Speicherung faellt, sofern bei geeigneten Premium-Plaenen keine andere Region gewaehlt wird.',
+        severity: 'moderate',
+        sourceUrl: 'https://help.dropbox.com/security/dropbox-sign-data-residency',
+      },
+      {
+        id: 'dropbox-no-client-side-encryption-or-byok-default',
+        text: 'Dropbox security documentation states there is no customer-managed private-key model or general client-side encryption by default in the standard service.',
+        textDe: 'Die Dropbox-Sicherheitsdokumentation nennt, dass im Standarddienst weder ein kundenseitig verwaltetes Private-Key-Modell noch allgemeine clientseitige Verschluesselung standardmaessig verfuegbar sind.',
+        severity: 'moderate',
+        sourceUrl: 'https://help.dropbox.com/security/how-security-works',
+      },
+      {
+        id: 'dropbox-ml-training-on-documents-and-metadata',
+        text: 'Dropbox\'s privacy FAQ states that machine-learning models may be trained on documents and metadata for features such as search, organization, and summarization.',
+        textDe: 'Die Dropbox-Privacy-FAQ nennt, dass Machine-Learning-Modelle auf Dokumenten und Metadaten trainiert werden koennen, etwa fuer Suche, Organisation und Zusammenfassungen.',
+        severity: 'major',
+        sourceUrl: 'https://help.dropbox.com/security/privacy-policy-faq',
+      },
+      {
+        id: 'dropbox-terms-content-scanning-and-third-party-permissions',
+        text: 'Dropbox Terms state the service may access, store, and scan user content to deliver features, and that this permission extends to affiliates and trusted third parties.',
+        textDe: 'Die Dropbox-AGB nennen, dass der Dienst Nutzerinhalte zur Bereitstellung von Funktionen abrufen, speichern und scannen darf und dass diese Erlaubnis auf verbundene Unternehmen sowie vertrauenswuerdige Drittparteien ausgeweitet wird.',
+        severity: 'major',
+        sourceUrl: 'https://www.dropbox.com/terms',
+      },
+      {
+        id: 'dropbox-third-party-ai-processing-openai',
+        text: 'Dropbox Dash documentation says relevant content may be sent to OpenAI for web-answering workflows, adding third-party AI processing exposure for enabled features.',
+        textDe: 'Die Dropbox-Dash-Dokumentation beschreibt, dass fuer Web-Antwort-Workflows relevante Inhalte an OpenAI gesendet werden koennen, was bei aktivierten Features zusaetzliche Drittanbieter-KI-Verarbeitungsexposition erzeugt.',
+        severity: 'moderate',
+        sourceUrl: 'https://help.dropbox.com/view-edit/dash-web-search',
+      },
+      {
+        id: 'dropbox-cancellation-complaints-pattern-bbb-2025',
+        text: 'BBB complaint records show recurring customer allegations about cancellation friction, billing continuation, and difficult support escalation paths.',
+        textDe: 'BBB-Beschwerdedaten zeigen wiederkehrende Kundenvorwuerfe zu Kuendigungsfriktion, fortlaufender Abrechnung und schwierigen Support-Eskalationswegen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.bbb.org/us/ca/san-francisco/profile/data-storage/dropbox-inc-1116-377630/complaints',
+      },
+      {
+        id: 'dropbox-workforce-reduction-2024',
+        text: 'Dropbox announced a workforce reduction of about 20% in October 2024 during an AI-led restructuring, which can increase execution and support-capacity transition risk.',
+        textDe: 'Dropbox kuendigte im Oktober 2024 im Rahmen einer KI-getriebenen Restrukturierung einen Stellenabbau von rund 20 Prozent an, was Uebergangsrisiken fuer Umsetzung und Support-Kapazitaet erhoehen kann.',
+        severity: 'moderate',
+        date: '2024-10-30',
+        sourceUrl: 'https://www.cnbc.com/2024/10/30/dropbox-lays-off-20percent-of-workforce.html',
+      },
+      {
+        id: 'dropbox-dual-class-voting-concentration-2024',
+        text: 'Dropbox\'s 2024 Form 10-K states directors/executive officers and affiliates held 77.5% voting power, with CEO Drew Houston holding about 77.4%, limiting outside shareholder influence on major corporate decisions.',
+        textDe: 'Das Dropbox-Form-10-K 2024 nennt fuer Directors/Executives und deren verbundene Parteien 77,5 Prozent der Stimmrechte; CEO Drew Houston hielt rund 77,4 Prozent, was den Einfluss externer Aktionaere auf wesentliche Unternehmensentscheidungen begrenzt.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.sec.gov/Archives/edgar/data/1467623/000146762325000011/dbx-20241231.htm',
+      },
+      {
+        id: 'dropbox-cfo-transition-2025',
+        text: 'Dropbox disclosed a CFO transition in December 2025, with Timothy Regan resigning and Ross Tennenbaum appointed as successor during an ongoing strategic transition period.',
+        textDe: 'Dropbox legte im Dezember 2025 einen CFO-Wechsel offen; Timothy Regan trat zurueck und Ross Tennenbaum wurde als Nachfolger waehrend einer laufenden strategischen Uebergangsphase bestellt.',
+        severity: 'minor',
+        date: '2025-12-10',
+        sourceUrl: 'https://www.sec.gov/Archives/edgar/data/1467623/000146762325000131/dbx-20251205.htm',
+      },
+      {
+        id: 'dropbox-subscription-fee-change-on-renewal',
+        text: 'Dropbox Terms allow fee changes at subscription renewal with at least 30 days notice, requiring active contract monitoring for cost-sensitive teams.',
+        textDe: 'Die Dropbox-AGB erlauben Gebuehrenaenderungen zur Verlaengerung bei mindestens 30 Tagen Vorankuendigung; fuer kostensensitive Teams ist daher aktives Vertragsmonitoring noetig.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dropbox.com/terms',
+      },
+      {
+        id: 'dropbox-termination-can-block-export-and-refunds',
+        text: 'Dropbox Terms state that after suspension or termination users may be unable to access or export content and that refunds are generally not provided where Dropbox suspends or terminates access.',
+        textDe: 'Die Dropbox-AGB nennen, dass Nutzer nach Sperre oder Kuendigung unter Umstaenden nicht mehr auf Inhalte zugreifen oder diese exportieren koennen und dass bei durch Dropbox veranlasster Sperre/Kuendigung grundsaetzlich keine Rueckerstattungen erfolgen.',
+        severity: 'moderate',
+        sourceUrl: 'https://www.dropbox.com/terms',
+      },
+      {
+        id: 'dropbox-dbxcli-unofficial-maintenance-risk',
+        text: 'The Dropbox-hosted dbxcli repository labels itself as unofficial with no formal support, and its latest release is from January 2019, signaling maintenance and support limitations for this tooling surface.',
+        textDe: 'Das von Dropbox gehostete dbxcli-Repository kennzeichnet sich selbst als inoffiziell ohne formalen Support; der letzte Release stammt aus Januar 2019, was Wartungs- und Supportgrenzen dieser Tooling-Oberflaeche signalisiert.',
+        severity: 'minor',
+        sourceUrl: 'https://github.com/dropbox/dbxcli',
+      },
+    ],
+  },
   paypal: {
     trustScore: 2.3,
     description:
-      'US-operated payments platform with strong scale and compliance signaling, but trust is materially reduced by a recent cybersecurity settlement, AI training on personal data, cross-border processing exposure, and recurring governance/operations friction.',
+        'US-operated payments platform with strong scale and compliance signaling, but trust is materially reduced by a recent cybersecurity settlement, AI training on personal data, cross-border processing exposure, and recurring governance/operations friction.',
     descriptionDe:
-      'US-Zahlungsplattform mit starker Skalierung und Compliance-Signalen, deren Vertrauen jedoch durch einen juengsten Cybersecurity-Vergleich, KI-Training mit Personendaten, grenzueberschreitende Verarbeitung sowie wiederkehrende Governance- und Betriebsfriktionen deutlich sinkt.',
+        'US-Zahlungsplattform mit starker Skalierung und Compliance-Signalen, deren Vertrauen jedoch durch einen juengsten Cybersecurity-Vergleich, KI-Training mit Personendaten, grenzueberschreitende Verarbeitung sowie wiederkehrende Governance- und Betriebsfriktionen deutlich sinkt.',
     reservations: [
       {
         id: 'paypal-nydfs-cybersecurity-settlement-2025',
@@ -1332,12 +2849,108 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
       },
     ],
   },
+  stripe: {
+    trustScore: 4.4,
+    description:
+        'US-operated payments infrastructure with strong security assurance and mature reliability, but trust is reduced by controller-scope data processing, cross-border transfer exposure, and broad contractual powers over reserves, payouts, and dispute economics.',
+    descriptionDe:
+        'US-Payments-Infrastruktur mit starken Security-Signalen und reifem Betrieb, deren Vertrauen jedoch durch Controller-Processing, grenzueberschreitende Datentransfers sowie weitreichende Vertragsrechte zu Reserven, Auszahlungen und Dispute-Kosten sinkt.',
+    reservations: [
+      {
+        id: 'stripe-controller-processing-beyond-processor-role',
+        text: 'Stripe\'s DPA states that Stripe can act as a data controller (not only processor) for fraud prevention, loss mitigation, compliance, and product improvement.',
+        textDe: 'Das Stripe-DPA beschreibt, dass Stripe nicht nur als Processor, sondern auch als Data Controller fuer Betrugspraevention, Verlustminderung, Compliance und Produktverbesserung agieren kann.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/legal/dpa',
+      },
+      {
+        id: 'stripe-cross-border-data-transfer-frameworks',
+        text: 'Stripe\'s legal data-transfer framework allows international transfers, including US transfer mechanisms (for example DPF/SCC paths), which adds jurisdictional exposure for strict sovereignty requirements.',
+        textDe: 'Das Data-Transfer-Framework von Stripe erlaubt internationale Uebermittlungen inklusive US-Transfermechanismen (z. B. DPF/SCC), was bei strikten Souveraenitaetsanforderungen zusaetzliche Jurisdiktionsrisiken erzeugt.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/gb/legal/dta',
+      },
+      {
+        id: 'stripe-reserve-and-funds-control-terms',
+        text: 'Services terms allow Stripe to establish and adjust reserves, and release of reserve funds is tied to Stripe\'s risk assessment.',
+        textDe: 'Die Service-Bedingungen erlauben Stripe, Reserven einzurichten und anzupassen; die Freigabe von Reservegeldern ist an die Stripe-Risikobewertung gebunden.',
+        severity: 'major',
+        sourceUrl: 'https://stripe.com/legal/ssa-services-terms',
+      },
+      {
+        id: 'stripe-payout-pauses-verification-and-risk-controls',
+        text: 'Stripe support documentation states payout dates can be postponed when verification requirements are outstanding, and temporary reserves can reduce expected payout amounts.',
+        textDe: 'Die Stripe-Support-Dokumentation nennt, dass Auszahlungen bei offenen Verifizierungsanforderungen verschoben werden koennen und temporaere Reserven erwartete Auszahlungsbetraege reduzieren koennen.',
+        severity: 'moderate',
+        sourceUrl: 'https://support.stripe.com/embedded-connect/questions/understanding-changes-to-my-payout-delivery-date',
+      },
+      {
+        id: 'stripe-dispute-received-fee-non-refundable',
+        text: 'Stripe disputes documentation states that dispute received fees are generally non-refundable and a separate countered fee applies when merchants contest disputes.',
+        textDe: 'Die Stripe-Disputes-Dokumentation nennt, dass die Dispute-Received-Fee in der Regel nicht erstattet wird und beim Anfechten zusaetzlich eine Countered-Fee anfaellt.',
+        severity: 'moderate',
+        sourceUrl: 'https://docs.stripe.com/disputes/how-disputes-work',
+      },
+      {
+        id: 'stripe-radar-cross-merchant-ml-data-use',
+        text: 'Stripe privacy documentation describes Radar and internal risk tooling using personal and transactional data for AI/ML fraud scoring, including aggregated network-level signals.',
+        textDe: 'Die Stripe-Privacy-Dokumentation beschreibt Radar und interne Risk-Tooling-Modelle, die personen- und transaktionsbezogene Daten fuer KI/ML-Fraud-Scoring inklusive aggregierter Netzwerk-Signale nutzen.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/privacy-center/legal',
+      },
+      {
+        id: 'stripe-soc1-soc2-artifacts-upon-request',
+        text: 'Stripe\'s DPA states SOC 1 and SOC 2 reports are produced annually but provided upon request, which reduces public verifiability depth compared with fully public assurance artifacts.',
+        textDe: 'Das Stripe-DPA nennt, dass SOC-1- und SOC-2-Berichte jaehrlich erstellt, aber nur auf Anfrage bereitgestellt werden; dadurch ist die oeffentliche Verifizierbarkeit geringer als bei vollstaendig oeffentlichen Assurance-Artefakten.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/legal/dpa',
+      },
+      {
+        id: 'stripe-support-not-obligated-to-customers',
+        text: 'Stripe\'s Services Agreement states Stripe is not obligated to provide support to merchants\' customers, which can lengthen resolution paths in payout/dispute stress scenarios.',
+        textDe: 'Das Stripe Services Agreement stellt klar, dass Stripe nicht verpflichtet ist, Support fuer Kunden von Haendlern bereitzustellen; das kann Loesungswege in Payout-/Dispute-Stressszenarien verlaengern.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/legal/ssa',
+      },
+      {
+        id: 'stripe-post-termination-data-retention-limits',
+        text: 'Stripe\'s Services Agreement states Stripe is not obligated to retain data after contract end except for legal or post-termination obligations, so off-platform retention planning is required.',
+        textDe: 'Das Stripe Services Agreement nennt, dass Stripe nach Vertragsende grundsaetzlich nicht zur Datenaufbewahrung verpflichtet ist, ausser fuer gesetzliche oder Post-Termination-Pflichten; externe Retention-Planung ist daher noetig.',
+        severity: 'moderate',
+        sourceUrl: 'https://stripe.com/legal/ssa',
+      },
+      {
+        id: 'stripe-community-holds-closure-escalation-signal',
+        text: 'Developer-community reports repeatedly describe account closures and long fund-hold escalation friction; these are OSINT signals rather than adjudicated findings, but remain operationally relevant for merchant cash-flow planning.',
+        textDe: 'Berichte aus der Entwickler-Community beschreiben wiederholt Kontoschliessungen und Reibung bei der Eskalation laengerer Funds-Holds; das sind OSINT-Signale und keine gerichtsfesten Befunde, aber operativ fuer Cashflow-Planung relevant.',
+        severity: 'moderate',
+        date: '2023-08-02',
+        sourceUrl: 'https://news.ycombinator.com/item?id=36974034',
+      },
+      {
+        id: 'stripe-public-repo-cicd-pwn-request-incident',
+        text: 'A publicly documented 2024 incident in a Stripe public repository showed a GitHub Actions \"pwn request\" pattern with token-exposure risk in CI/CD workflow configuration.',
+        textDe: 'Ein oeffentlich dokumentierter Vorfall von 2024 in einem Stripe-Public-Repository zeigte ein GitHub-Actions-\"pwn request\"-Muster mit Token-Expositionsrisiko in der CI/CD-Workflow-Konfiguration.',
+        severity: 'moderate',
+        date: '2024-10-01',
+        sourceUrl: 'https://www.stepsecurity.io/incidents',
+      },
+      {
+        id: 'stripe-cli-path-traversal-cve-2024-45401',
+        text: 'A 2024 Stripe CLI security advisory disclosed a path traversal / arbitrary file overwrite issue (CVE-2024-45401), patched in version 1.21.3.',
+        textDe: 'Ein Stripe-CLI-Sicherheitsadvisory von 2024 beschrieb ein Path-Traversal-/Arbitrary-File-Overwrite-Problem (CVE-2024-45401), behoben in Version 1.21.3.',
+        severity: 'moderate',
+        date: '2024-09-05',
+        sourceUrl: 'https://github.com/stripe/stripe-cli/security/advisories/GHSA-fv4g-gwpj-74gr',
+      },
+    ],
+  },
   shopify: {
     trustScore: 3.7,
     description:
-      'US-operated commerce platform with strong security assurance and mature operations, but trust is reduced by insider incident history, broad contractual rights over merchant materials, and privacy complexity from cross-merchant intelligence and AI subprocessors.',
+        'US-operated commerce platform with strong security assurance and mature operations, but trust is reduced by insider incident history, broad contractual rights over merchant materials, and privacy complexity from cross-merchant intelligence and AI subprocessors.',
     descriptionDe:
-      'US-Commerce-Plattform mit starken Security-Signalen und reifer Betriebsstabilitaet, deren Vertrauen aber durch Insider-Vorfallshistorie, breite Vertragsrechte an Merchant-Materialien sowie Privacy-Komplexitaet durch haendleruebergreifende Datenintelligenz und KI-Unterauftragsverarbeiter sinkt.',
+        'US-Commerce-Plattform mit starken Security-Signalen und reifer Betriebsstabilitaet, deren Vertrauen aber durch Insider-Vorfallshistorie, breite Vertragsrechte an Merchant-Materialien sowie Privacy-Komplexitaet durch haendleruebergreifende Datenintelligenz und KI-Unterauftragsverarbeiter sinkt.',
     reservations: [
       {
         id: 'shopify-insider-incident-2020',
@@ -1423,9 +3036,9 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
   'x-corp': {
     trustScore: 1.3,
     description:
-      'US-operated social platform with active vulnerability-reporting channels and significant engineering output, but trust is very low due to repeated privacy enforcement, high-impact identifier exposure history, broad AI-training rights over user content, and unstable governance/API policy changes.',
+        'US-operated social platform with active vulnerability-reporting channels and significant engineering output, but trust is very low due to repeated privacy enforcement, high-impact identifier exposure history, broad AI-training rights over user content, and unstable governance/API policy changes.',
     descriptionDe:
-      'US-Social-Plattform mit aktiven Kanaelen fuer Schwachstellenmeldungen und starker Engineering-Leistung, deren Vertrauen jedoch wegen wiederholter Privacy-Durchsetzung, hochrelevanter Identifier-Exposure-Historie, breiter AI-Training-Rechte an Nutzerinhalten und instabiler Governance-/API-Politik sehr niedrig ist.',
+        'US-Social-Plattform mit aktiven Kanaelen fuer Schwachstellenmeldungen und starker Engineering-Leistung, deren Vertrauen jedoch wegen wiederholter Privacy-Durchsetzung, hochrelevanter Identifier-Exposure-Historie, breiter AI-Training-Rechte an Nutzerinhalten und instabiler Governance-/API-Politik sehr niedrig ist.',
     reservations: [
       {
         id: 'x-ftc-privacy-penalty-2022',
@@ -1551,17 +3164,17 @@ const US_VENDOR_TRUST_PROFILES: Record<string, USVendorTrustProfile> = {
 
 function normalizeVendorName(value: string): string {
   return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
 }
 
 function slugifyVendorName(value: string): string {
   return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .replace(/-{2,}/g, '-');
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .replace(/-{2,}/g, '-');
 }
 
 const US_VENDOR_BY_ALIAS = new Map<string, USVendorRecord>();
@@ -1584,16 +3197,18 @@ function toComparison(record: USVendorRecord, sourceName?: string): USVendorComp
   const lowerRecordName = record.name.toLowerCase();
   const lowerSourceLabel = sourceLabel.toLowerCase();
   const compactContext = lowerSourceLabel.startsWith(`${lowerRecordName} `)
-    ? sourceLabel.slice(record.name.length).trim()
-    : sourceLabel;
+      ? sourceLabel.slice(record.name.length).trim()
+      : sourceLabel;
   const contextualName = (() => {
     if (!shouldIncludeContext || !compactContext) {
       return record.name;
     }
 
-    return compactContext.includes('(')
-      ? `${record.name}: ${compactContext}`
-      : `${record.name} (${compactContext})`;
+    if (compactContext.startsWith('(')) {
+      return `${record.name} ${compactContext}`;
+    }
+
+    return `${record.name} (${compactContext})`;
   })();
 
   return {
