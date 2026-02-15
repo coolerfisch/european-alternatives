@@ -538,4 +538,25 @@ export const manualAlternatives: Alternative[] = [
     headquartersCity: 'Strasbourg',
     license: 'Apache-2.0',
   },
+  {
+  id: 'vaultwarden',
+  name: 'Vaultwarden',
+  description:
+    'Lightweight, community-driven Rust implementation of the Bitwarden server API, designed for self-hosting. Vaultwarden is fully open source under AGPL-3.0 and compatible with official Bitwarden clients, enabling secure password management with end-to-end encryption and full control over your data.',
+  localizedDescriptions: {
+    de: 'Leichtgewichtige, community-getriebene Rust-Implementierung der Bitwarden-Server-API für Self-Hosting. Vaultwarden ist vollständig quelloffen (AGPL-3.0) und kompatibel mit den offiziellen Bitwarden-Clients. Es ermöglicht sicheres Passwort-Management mit Ende-zu-Ende-Verschlüsselung und voller Datenkontrolle.',
+  },
+  website: 'https://github.com/dani-garcia/vaultwarden',
+  country: 'es',
+  category: 'password-manager',
+  replacesUS: ['Bitwarden (hosted)', '1Password', 'LastPass', 'Google Password Manager'],
+  isOpenSource: true,
+  openSourceLevel: 'full',
+  sourceCodeUrl: 'https://github.com/dani-garcia/vaultwarden',
+  pricing: 'free',
+  tags: ['password-manager', 'self-hosted', 'encryption', 'privacy', 'rust', 'bitwarden-compatible', 'free-community-servers'],
+  foundedYear: 2018,
+  headquartersCity: 'Global upstream community',
+  license: 'AGPL-3.0',
+},
 ];
