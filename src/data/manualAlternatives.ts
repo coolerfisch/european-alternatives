@@ -577,4 +577,46 @@ export const manualAlternatives: Alternative[] = [
     tags: ['email', 'privacy', 'at-based', 'gdpr', 'no-ads', 'minimalist', 'paid'],
     headquartersCity: 'Vienna',
   },
+
+  {
+    id: 'heylogin',
+    name: 'heylogin',
+    description:
+      'Next-generation passwordless login manager from Germany (Braunschweig) that uses smartphones as security keys. Features end-to-end encryption and is free for personal use.',
+    localizedDescriptions: {
+      de: 'Passwortloser Login-Manager aus Deutschland (Braunschweig), der Smartphones als Sicherheitsschlüssel nutzt. Bietet Ende-zu-Ende-Verschlüsselung und ist für Privatpersonen kostenlos.',
+    },
+    website: 'https://www.heylogin.com',
+    logo: '/logos/heylogin.svg',
+    country: 'de',
+    category: 'security',
+    replacesUS: ['LastPass', '1Password', 'Dashlane', 'Google Password Manager'],
+    isOpenSource: false,
+    openSourceLevel: 'none',
+    pricing: 'freemium',
+    tags: ['security', 'passwordless', 'privacy', 'gdpr', '2fa', 'login-manager'],
+    headquartersCity: 'Braunschweig',
+  },
+  {
+    id: 'cryptostorm',
+    name: 'cryptostorm',
+    description:
+      'High-security VPN service based in Iceland, using token-based authentication and a strict focus on anonymity to ensure maximum user privacy.',
+    localizedDescriptions: {
+      de: 'Hochsicherer VPN-Dienst mit Sitz in Island, der konsequent auf Anonymität und Token-basierte Authentifizierung setzt, um Nutzerdaten maximal zu schützen.',
+    },
+    website: 'https://cryptostorm.is',
+    logo: '/logos/cryptostorm.svg',
+    country: 'is',
+    category: 'vpn',
+    replacesUS: ['NordVPN', 'ExpressVPN', 'Private Internet Access'],
+    isOpenSource: true,
+    openSourceLevel: 'partial',
+    sourceCodeUrl: 'https://github.com/cryptostorm',
+    pricing: 'paid',
+    tags: ['vpn', 'privacy', 'anonymity', 'security', 'token-based', 'iceland'],
+    headquartersCity: 'Reykjavík',
+  },
+
+  
 ];
