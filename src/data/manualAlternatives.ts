@@ -518,6 +518,26 @@ export const manualAlternatives: Alternative[] = [
     license: 'GPL-2.0-only',
   },
   {
+    id: 'monnett',
+    name: 'Monnett',
+    description:
+      'Luxembourg-based social media platform built for chronological, algorithm-free sharing. Monnett prohibits AI-generated content and behavioral tracking, letting users control their feed with a "Distance" feature that sets post reach from local to global. Founded by Christos Floros, the platform runs ad-free with optional subscription tiers.',
+    localizedDescriptions: {
+      de: 'Luxemburgische Social-Media-Plattform für chronologisches, algorithmusfreies Teilen. Monnett verbietet KI-generierte Inhalte und Verhaltenstracking und lässt Nutzende ihren Feed über eine „Distance"-Funktion steuern, die die Reichweite von lokal bis global einstellt. Gegründet von Christos Floros, läuft die Plattform werbefrei mit optionalen Abo-Stufen.',
+    },
+    website: 'https://monnett.social',
+    logo: '/logos/monnett.svg',
+    country: 'lu',
+    category: 'social-media',
+    replacesUS: ['Facebook', 'Instagram', 'X/Twitter'],
+    isOpenSource: false,
+    openSourceLevel: 'none',
+    pricing: 'freemium',
+    tags: ['social-media', 'privacy', 'no-algorithm', 'chronological-feed', 'ad-free', 'no-tracking', 'gdpr'],
+    foundedYear: 2025,
+    headquartersCity: 'Luxembourg',
+  },
+  {
     id: 'jitsi',
     name: 'Jitsi',
     logo: '/logos/jitsi.svg',
